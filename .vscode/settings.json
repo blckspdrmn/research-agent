@@ -1,0 +1,13 @@
+{
+  // .pyファイルの設定
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff", // フォーマッターをRuffに設定
+    "editor.formatOnSave": true, // ファイル保存時にフォーマット
+    "editor.codeActionsOnSave": {
+      "source.fixAll.ruff": "explicit", // 自動修正可能なLintエラーを修正
+      "source.organizeImports.ruff": "explicit" // import文を整理（並べ替え・未使用削除）
+    }
+  },
+  // Pythonの仮想環境は api/.venv にあり、ワークスペース直下ではないため自動検出されない。 明示しないとPylanceが依存を解決できない
+  "python.defaultInterpreterPath": "${workspaceFolder}/api/.venv/bin/python"
+}

@@ -1,0 +1,44 @@
+[project]
+name = "api"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.141.1",
+    "uvicorn[standard]>=0.52.1",
+]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+    "ruff>=0.16.1",
+]
+
+[tool.ruff]
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+  "E", "W",   # pycodestyle: PEP 8のスタイル違反
+  "F",        # Pyflakes: 未使用のimport/変数、未定義名
+  "I",        # isort: importの並び順
+  "UP",       # pyupgrade: 古い書き方を新しい構文へ(Optional[str] → str | None など)
+  "B",        # flake8-bugbear: 実際に事故につながりやすい書き方の検出
+  "ASYNC",    # flake8-async: 非同期コードのアンチパターン検出
+  "S",        # flake8-bandit: セキュリティ観点の検査
+]
+[tool.ruff.lint.per-file-ignores]
+# 例外はテストコードの中だけに限定する(本番コードでは指摘させる)
+"tests/*" = [
+  "S101",     # assertの使用。本番コードでは python -O で消えるため危険だが、テストでは当然使う
+  "S105",     # ハードコードされたパスワード文字列。テスト内のダミー値を許可
+  "S106",     # 同上(関数引数として渡す場合)
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"        # async def のテストに @pytest.mark.asyncio を書かなくてよくなる
+testpaths = ["tests"]
+pythonpath = ["."]
