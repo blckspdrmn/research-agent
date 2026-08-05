@@ -11,7 +11,7 @@ themes_db: dict[int, Theme] = {}
 next_id: int = 1
 
 
-@router.post("/themes", response_model=Theme, status_code=201)
+@router.post("", response_model=Theme, status_code=201)
 async def create_theme(body: ThemeCreate):
     global next_id
     theme = Theme(
