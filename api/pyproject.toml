@@ -11,6 +11,9 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "httpx>=0.28.1",
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
     "ruff>=0.16.1",
 ]
 
@@ -27,9 +30,15 @@ select = [
   "ASYNC",    # flake8-async: 非同期コードのアンチパターン検出
   "S",        # flake8-bandit: セキュリティ観点の検査
 ]
-ignore = [
-  "S101",     # assertの使用。テストコードでは当然使うので許可する
+[tool.ruff.lint.per-file-ignores]
+# 例外はテストコードの中だけに限定する(本番コードでは指摘させる)
+"tests/*" = [
+  "S101",     # assertの使用。本番コードでは python -O で消えるため危険だが、テストでは当然使う
+  "S105",     # ハードコードされたパスワード文字列。テスト内のダミー値を許可
+  "S106",     # 同上(関数引数として渡す場合)
 ]
 
-[tool.ruff.lint.per-file-ignores]
-"tests/*" = ["S105", "S106"]   # テスト内のダミーパスワード文字列を許可
+[tool.pytest.ini_options]
+asyncio_mode = "auto"        # async def のテストに @pytest.mark.asyncio を書かなくてよくなる
+testpaths = ["tests"]
+pythonpath = ["."]
