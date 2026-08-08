@@ -14,11 +14,13 @@ next_id: int = 1
 @router.post("", response_model=Theme, status_code=201)
 async def create_theme(body: ThemeCreate):
     global next_id
+    now = datetime.now(UTC)
     theme = Theme(
         id=next_id,
         title=body.title,
         description=body.description,
-        created_at=datetime.now(UTC),
+        created_at=now,
+        updated_at=now,
     )
     themes_db[theme.id] = theme
     next_id += 1
@@ -42,7 +44,9 @@ async def update_theme(theme_id: int, body: ThemeUpdate):
     if theme_id not in themes_db:
         raise HTTPException(status_code=404, detail="Theme not found")
     current = themes_db[theme_id]
-    updated = current.model_copy(update=body.model_dump(exclude_unset=True))
+    updated = current.model_copy(
+        update={**body.model_dump(exclude_unset=True), "updated_at": datetime.now(UTC)}
+    )
     themes_db[theme_id] = updated
     return updated
 
