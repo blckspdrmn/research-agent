@@ -1,3 +1,4 @@
+import uuid
 from datetime import datetime
 
 from pydantic import BaseModel, Field
@@ -20,7 +21,7 @@ class ThemeUpdate(BaseModel):
 class Theme(BaseModel):
     """レスポンスとして返す完全なテーマ"""
 
-    id: int
+    id: uuid.UUID
     title: str
     description: str | None
     created_at: datetime

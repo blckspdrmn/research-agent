@@ -1,3 +1,4 @@
+import uuid
 from datetime import UTC, datetime
 
 from fastapi import APIRouter, HTTPException
@@ -7,23 +8,20 @@ from schemas import Theme, ThemeCreate, ThemeUpdate
 router = APIRouter(prefix="/themes", tags=["themes"])
 
 # TODO: のちほどインメモリの仮ストアからDBに置き換える
-themes_db: dict[int, Theme] = {}
-next_id: int = 1
+themes_db: dict[uuid.UUID, Theme] = {}
 
 
 @router.post("", response_model=Theme, status_code=201)
 async def create_theme(body: ThemeCreate):
-    global next_id
     now = datetime.now(UTC)
     theme = Theme(
-        id=next_id,
+        id=uuid.uuid4(),
         title=body.title,
         description=body.description,
         created_at=now,
         updated_at=now,
     )
     themes_db[theme.id] = theme
-    next_id += 1
     return theme
 
 
@@ -33,14 +31,14 @@ async def list_themes():
 
 
 @router.get("/{theme_id}", response_model=Theme)
-async def get_theme(theme_id: int):
+async def get_theme(theme_id: uuid.UUID):
     if theme_id not in themes_db:
         raise HTTPException(status_code=404, detail="Theme not found")
     return themes_db[theme_id]
 
 
 @router.patch("/{theme_id}", response_model=Theme)
-async def update_theme(theme_id: int, body: ThemeUpdate):
+async def update_theme(theme_id: uuid.UUID, body: ThemeUpdate):
     if theme_id not in themes_db:
         raise HTTPException(status_code=404, detail="Theme not found")
     current = themes_db[theme_id]
@@ -52,7 +50,7 @@ async def update_theme(theme_id: int, body: ThemeUpdate):
 
 
 @router.delete("/{theme_id}", status_code=204)
-async def delete_theme(theme_id: int):
+async def delete_theme(theme_id: uuid.UUID):
     if theme_id not in themes_db:
         raise HTTPException(status_code=404, detail="Theme not found")
     del themes_db[theme_id]

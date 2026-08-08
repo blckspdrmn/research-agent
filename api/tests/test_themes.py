@@ -1,3 +1,5 @@
+import uuid
+
 import httpx
 import pytest
 
@@ -9,7 +11,6 @@ from routers import themes
 def reset_store():
     """各テストの前にインメモリストアを空に戻す(テスト間の独立性)"""
     themes.themes_db.clear()
-    themes.next_id = 1
     yield
 
 
@@ -33,7 +34,7 @@ async def test_create_theme_returns_201_with_generated_fields(client):
     assert res.status_code == 201
     body = res.json()
     assert body["title"] == "Next.jsの最新動向"
-    assert body["id"] == 1  # 採番されている
+    assert body["id"]  # 採番されている（UUID文字列）
     assert body["created_at"] is not None  # サーバー側で埋まっている
 
 
@@ -44,7 +45,8 @@ async def test_empty_title_is_rejected_with_422(client):
 
 
 async def test_get_unknown_theme_returns_404(client):
-    assert (await client.get("/themes/999")).status_code == 404
+    unknown = uuid.uuid4()
+    assert (await client.get(f"/themes/{unknown}")).status_code == 404
 
 
 async def test_patch_updates_only_given_field(client):
