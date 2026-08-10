@@ -1,56 +1,68 @@
 import uuid
-from datetime import UTC, datetime
+from typing import Annotated
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
-from schemas import Theme, ThemeCreate, ThemeUpdate
+import models
+from config import settings
+from database import get_db
+from schemas import ThemeCreate, ThemeOut, ThemeUpdate
 
 router = APIRouter(prefix="/themes", tags=["themes"])
 
-# TODO: のちほどインメモリの仮ストアからDBに置き換える
-themes_db: dict[uuid.UUID, Theme] = {}
+# TODO: のちほど認証ユーザーに置き換える
+# （暫定：直接DBにInsertしたダミーユーザーのIDを用いている）
+DUMMY_USER_ID = settings.dummy_user_id
 
 
-@router.post("", response_model=Theme, status_code=201)
-async def create_theme(body: ThemeCreate):
-    now = datetime.now(UTC)
-    theme = Theme(
-        id=uuid.uuid4(),
-        title=body.title,
-        description=body.description,
-        created_at=now,
-        updated_at=now,
-    )
-    themes_db[theme.id] = theme
+async def _get_owned_theme(db: AsyncSession, theme_id: uuid.UUID) -> models.Theme:
+    """無い場合も他人のものも同じ404にする（データの存在を知らせないため）"""
+    theme = await db.get(models.Theme, theme_id)
+    if theme is None or theme.user_id != DUMMY_USER_ID:
+        raise HTTPException(status_code=404, detail="Theme not found")
     return theme
 
 
-@router.get("", response_model=list[Theme])
-async def list_themes():
-    return list(themes_db.values())
+@router.post("", response_model=ThemeOut, status_code=201)
+async def create_theme(body: ThemeCreate, db: Annotated[AsyncSession, Depends(get_db)]):
+    theme = models.Theme(user_id=DUMMY_USER_ID, **body.model_dump())
+    db.add(theme)
+    await db.commit()
+    await db.refresh(theme)
+    return theme
 
 
-@router.get("/{theme_id}", response_model=Theme)
-async def get_theme(theme_id: uuid.UUID):
-    if theme_id not in themes_db:
-        raise HTTPException(status_code=404, detail="Theme not found")
-    return themes_db[theme_id]
+@router.get("", response_model=list[ThemeOut])
+async def list_themes(db: Annotated[AsyncSession, Depends(get_db)]):
+    stmt = select(models.Theme).where(models.Theme.user_id == DUMMY_USER_ID)
+    return (await db.scalars(stmt)).all()
 
 
-@router.patch("/{theme_id}", response_model=Theme)
-async def update_theme(theme_id: uuid.UUID, body: ThemeUpdate):
-    if theme_id not in themes_db:
-        raise HTTPException(status_code=404, detail="Theme not found")
-    current = themes_db[theme_id]
-    updated = current.model_copy(
-        update={**body.model_dump(exclude_unset=True), "updated_at": datetime.now(UTC)}
-    )
-    themes_db[theme_id] = updated
-    return updated
+@router.get("/{theme_id}", response_model=ThemeOut)
+async def get_theme(theme_id: uuid.UUID, db: Annotated[AsyncSession, Depends(get_db)]):
+    return await _get_owned_theme(db, theme_id)
+
+
+@router.patch("/{theme_id}", response_model=ThemeOut)
+async def update_theme(
+    theme_id: uuid.UUID,
+    body: ThemeUpdate,
+    db: Annotated[AsyncSession, Depends(get_db)],
+):
+    theme = await _get_owned_theme(db, theme_id)
+    for field, value in body.model_dump(exclude_unset=True).items():
+        setattr(theme, field, value)
+    await db.commit()
+    await db.refresh(theme)
+    return theme
 
 
 @router.delete("/{theme_id}", status_code=204)
-async def delete_theme(theme_id: uuid.UUID):
-    if theme_id not in themes_db:
-        raise HTTPException(status_code=404, detail="Theme not found")
-    del themes_db[theme_id]
+async def delete_theme(
+    theme_id: uuid.UUID, db: Annotated[AsyncSession, Depends(get_db)]
+):
+    theme = await _get_owned_theme(db, theme_id)
+    await db.delete(theme)
+    await db.commit()
