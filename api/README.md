@@ -25,12 +25,16 @@ cp .env.example .env
 | 変数 | 内容 |
 |---|---|
 | `DATABASE_URL` | 接続先 PostgreSQL。`postgresql+psycopg://<ユーザー名>:<パスワード>@localhost:5432/<データベース名>` |
+| `TEST_DATABASE_URL` | テスト実行時の接続先。開発用とは**別のデータベース**を指定する ([テスト](#テスト)) |
+| `DUMMY_USER_ID` | 認証実装までの暫定値。[初期データ](#初期データ)で採番された UUID を設定する |
 
 `<ユーザー名>` `<パスワード>` `<データベース名>` は任意に決めてよい。ただし**下記のコンテナ起動時に指定する値と一致させること**。
 
 - `.env` は Git 管理外 (`.gitignore`)。認証情報を含むためコミットしないこと
 - 設定の読み込みは `config.py` の `Settings` (pydantic-settings) が担当する
 - `env_file` を相対パスで指定しているため、**コマンドは `api/` ディレクトリ上で実行する**こと。別の階層から実行すると `.env` が読まれず起動時に検証エラーになる
+- `DUMMY_USER_ID` は UUID として検証される。形式が不正な場合は起動時にエラーで停止する
+- `TEST_DATABASE_URL` は未設定でもアプリは起動する (テスト実行時のみ必要なため)
 
 ## データベース (PostgreSQL)
 
@@ -74,6 +78,39 @@ docker volume rm research-agent-pgdata
 
 ※ 現状は `docker run` を手で叩く運用。将来的に Docker Compose へ移行する。
 
+## マイグレーション (Alembic)
+
+コンテナを起動しただけではテーブルは存在しない。**初回セットアップ時と、モデル変更を取り込んだときは必ず実行する**。
+
+```bash
+uv run alembic upgrade head    # 最新まで適用
+```
+
+| コマンド | 内容 |
+|---|---|
+| `uv run alembic current` | 適用済みのリビジョンを表示 |
+| `uv run alembic history` | マイグレーションの履歴を表示 |
+| `uv run alembic upgrade head --sql` | DB に適用せず、実行される SQL だけを出力 |
+| `uv run alembic revision --autogenerate -m "<説明>"` | モデルとの差分からマイグレーションを生成 |
+| `uv run alembic downgrade -1` | 1つ前に戻す |
+
+- **コマンドは `api/` ディレクトリ上で実行する**こと。`alembic.ini` の `prepend_sys_path = .` が実行時のカレントディレクトリを import パスに加えるため、別の階層からだと `ModuleNotFoundError: No module named 'config'` になる
+- 接続先は `alembic.ini` の `sqlalchemy.url` ではなく、`migrations/env.py` が `.env` から読み込む
+- `--autogenerate` で生成したファイルは、**適用する前に必ず内容を確認する**こと。特にテーブル名・列名の変更(リネーム)は検出できず、「削除 + 追加」と解釈されてデータが失われる
+
+## 初期データ
+
+認証が未実装のため、テーマの所有者となるユーザーを1件手動で投入する。**ID は DB 側が採番する**ので、`RETURNING` で受け取って `.env` に設定する。
+
+```bash
+docker exec -it research-agent-db psql -U <ユーザー名> -d <データベース名> \
+  -c "INSERT INTO users (email) VALUES ('dev@example.com') RETURNING id;"
+```
+
+表示された UUID を `.env` の `DUMMY_USER_ID` に設定する。
+
+> **注意**: この手順は認証を実装するまでの暫定措置。実装時に `DUMMY_USER_ID` と本セクションは削除する。
+
 ## 起動
 
 ```bash
@@ -95,6 +132,30 @@ curl -s http://localhost:8000/health
 | http://localhost:8000/health | ヘルスチェック |
 | http://localhost:8000/docs | Swagger UI (ブラウザから API を試せる) |
 | http://localhost:8000/openapi.json | OpenAPI 定義 (自動生成) |
+
+## テスト
+
+テストは開発用とは別のデータベースに対して実行する。初回のみ作成が必要。
+
+```bash
+docker exec -it research-agent-db psql -U <ユーザー名> -d postgres \
+  -c "CREATE DATABASE <データベース名>_test;"
+```
+
+作成したデータベースを `.env` の `TEST_DATABASE_URL` に設定してから実行する。
+
+```bash
+uv run pytest         # 全テスト
+uv run pytest -q      # 結果のみ簡潔に表示
+uv run pytest -k <キーワード>   # 名前でテストを絞り込む
+```
+
+> **⚠️ `TEST_DATABASE_URL` を開発用データベースに向けないこと**
+>
+> テストは実行のたびに**全テーブルを削除して作り直す** (`conftest.py`)。誤って開発用を指していると開発データが失われる。事故防止として、データベース名が `_test` で終わらない場合はテストが起動しないようにしてある。
+
+- テスト用のテーブルはマイグレーションではなくモデル定義から直接作成している。そのため**マイグレーションの正しさはテストでは検証されない**
+- HTTP リクエストは `httpx.ASGITransport` でアプリを直接呼び出しており、サーバーの起動は不要
 
 ## Lint / Format
 
