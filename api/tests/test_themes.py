@@ -1,27 +1,5 @@
 import uuid
 
-import httpx
-import pytest
-
-from main import app
-from routers import themes
-
-
-@pytest.fixture(autouse=True)  # 全テストに自動適用
-def reset_store():
-    """各テストの前にインメモリストアを空に戻す(テスト間の独立性)"""
-    themes.themes_db.clear()
-    yield
-
-
-@pytest.fixture
-async def client():
-    transport = httpx.ASGITransport(
-        app=app
-    )  # uvicornサーバーを立てること無くFastAPIアプリを呼ぶ
-    async with httpx.AsyncClient(transport=transport, base_url="http://test") as c:
-        yield c  # テストに渡す
-
 
 async def test_health_returns_ok(client):
     res = await client.get("/health")
