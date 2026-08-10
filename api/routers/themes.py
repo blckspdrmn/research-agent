@@ -1,7 +1,7 @@
 import uuid
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -35,8 +35,18 @@ async def create_theme(body: ThemeCreate, db: Annotated[AsyncSession, Depends(ge
 
 
 @router.get("", response_model=list[ThemeOut])
-async def list_themes(db: Annotated[AsyncSession, Depends(get_db)]):
-    stmt = select(models.Theme).where(models.Theme.user_id == DUMMY_USER_ID)
+async def list_themes(
+    db: Annotated[AsyncSession, Depends(get_db)],
+    limit: Annotated[int, Query(ge=1, le=100)] = 20,
+    offset: Annotated[int, Query(ge=0)] = 0,
+):
+    stmt = (
+        select(models.Theme)
+        .where(models.Theme.user_id == DUMMY_USER_ID)
+        .order_by(models.Theme.created_at.desc(), models.Theme.id.desc())
+        .limit(limit)
+        .offset(offset)
+    )
     return (await db.scalars(stmt)).all()
 
 
