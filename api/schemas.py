@@ -1,3 +1,4 @@
+import uuid
 from datetime import datetime
 
 from pydantic import BaseModel, Field
@@ -17,10 +18,13 @@ class ThemeUpdate(BaseModel):
     description: str | None = None
 
 
-class Theme(BaseModel):
+class ThemeOut(BaseModel):
     """レスポンスとして返す完全なテーマ"""
 
-    id: int
+    id: uuid.UUID
     title: str
     description: str | None
     created_at: datetime
+    updated_at: datetime
+
+    model_config = {"from_attributes": True}  # SQLAlchemyモデル→Pydanticの変換を許可
