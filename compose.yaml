@@ -26,7 +26,7 @@ services:
       DATABASE_URL: postgresql+psycopg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
     volumes:
       - ./api:/app # bind mount: --reloadと合わせてホットリロード。ホスト側（./api）でコードを編集した瞬間、コンテナの/appにも即座に反映
-      - /app/.venv # bind mountの例外: ホスト側の.venvがLinux用.venvを上書きしないように
+      - api_venv:/app/.venv # bind mountの例外: ホスト側の.venvがLinux用.venvを上書きしないように(名前付きボリュームで安定させる)
     command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload # Dockerfileのコマンドを開発用に上書き
     depends_on:
       db: # dbが起動完了してからapiを起動
@@ -34,3 +34,4 @@ services:
 
 volumes:
   pgdata: # 名前つきボリュームの実体を宣言すると作成してくれる
+  api_venv:
