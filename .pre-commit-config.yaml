@@ -20,3 +20,19 @@ repos:
       # Run the formatter.
       - id: ruff-format
         files: ^api/
+
+  # Frontend: ESLint(lint) + Prettier(format)
+  - repo: local
+    hooks:
+      - id: eslint
+        name: eslint (frontend)
+        entry: bash -c 'cd frontend && npx eslint --fix'
+        language: system
+        files: ^frontend/.*\.(js|jsx|ts|tsx|mjs|cjs)$
+        pass_filenames: false
+      - id: prettier
+        name: prettier (frontend)
+        entry: bash -c 'cd frontend && npx prettier --write .'
+        language: system
+        files: ^frontend/.*\.(js|jsx|ts|tsx|mjs|cjs|json|css|md)$
+        pass_filenames: false
