@@ -34,6 +34,21 @@ services:
       db: # dbが起動完了してからapiを起動
         condition: service_healthy
 
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3001:3000"
+    environment:
+      API_URL_INTERNAL: http://api:8000
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules # node_modulesも.venv同様にbind mountから除外
+      - /app/.next # .nextも同様
+    depends_on:
+      - api
+
 volumes: # 名前つきボリュームの実体を宣言すると作成してくれる
   pgdata:
   api_venv:
