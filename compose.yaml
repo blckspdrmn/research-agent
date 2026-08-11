@@ -1,0 +1,36 @@
+# ローカル開発専用の構成。--reloadやbind mountなど開発の利便性のための設定を含む。
+# 本番はこのファイルを経由せず、Bicep + Container Appsで別途デプロイする予定
+
+services:
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql
+    healthcheck: # 3秒おきに生存チェック
+      test: ["CMD-SHELL", "pg_isready -U app -d research_agent"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build: ./api # ./api/Dockerfile からbuildしてイメージを作る
+    ports:
+      - "8000:8000"
+    environment: #./api/.envより優先
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+    volumes:
+      - ./api:/app # bind mount: --reloadと合わせてホットリロード。ホスト側（./api）でコードを編集した瞬間、コンテナの/appにも即座に反映
+      - /app/.venv # bind mountの例外: ホスト側の.venvがLinux用.venvを上書きしないように
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload # Dockerfileのコマンドを開発用に上書き
+    depends_on:
+      db: # dbが起動完了してからapiを起動
+        condition: service_healthy
+
+volumes:
+  pgdata: # 名前つきボリュームの実体を宣言すると作成してくれる
