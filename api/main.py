@@ -1,5 +1,5 @@
+import os
 from fastapi import FastAPI
-
 from routers import themes
 
 app = FastAPI(title="Research Agent API")
