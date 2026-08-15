@@ -39,8 +39,8 @@ test-db: ## テスト用データベースを作成(初回のみ)
 	  -c "CREATE DATABASE $(POSTGRES_DB)_test;"
 
 lint: ## lint
-	docker compose exec api ruff check .
-	docker compose exec api ruff format --check .
+	docker compose exec api ruff check --no-cache .
+	docker compose exec api ruff format --no-cache --check .
 
 format: ## 自動整形
 	docker compose exec api ruff check --fix .
