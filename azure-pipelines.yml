@@ -1,19 +1,56 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
-- main
+  branches:
+    include: [main]
+  paths:
+    include: [api/**, frontend/**, azure-pipelines.yml]
 
-pool:
-  vmImage: ubuntu-latest
+pr:
+  branches:
+    include: [main]
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages:
+  - stage: CI
+    displayName: lint & test
+    jobs:
+      - job: api
+        pool:
+          name: SelfHosted-Mac # 別途作成したSelf Hosted Agent
+        steps:
+          - script: |
+              cp .env.example .env
+              cp api/.env.example api/.env
+              cat >> .env <<'EOF'
+              COMPOSE_PROJECT_NAME=research-agent-ci
+              DB_PORT=15432
+              API_PORT=18000
+              FRONTEND_PORT=13001
+              EOF
+            displayName: prepare .env (開発環境と衝突しないポートに退避) # TODO: 現状、開発専用の値しかないのでそのままコピーしているが、秘密情報を扱う際にはシークレット変数から注入する形に変える
+          - script: make up
+            displayName: start containers (docker compose)
+          - script: make test-db
+            displayName: create test database
+          - script: make ci
+            displayName: lint & test (apiコンテナ内で実行)
+          - task: PublishTestResults@2 # https://learn.microsoft.com/ja-jp/azure/devops/pipelines/tasks/reference/publish-test-results-v2?view=azure-pipelines&tabs=trx%2Ctrxattachments%2Cyaml
+            condition: always()
+            inputs:
+              testResultsFiles: api/results.xml
+            displayName: publish test results
+          - script: make down-clean
+            condition: always()
+            displayName: cleanup (ボリュームごと破棄)
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+      - job: frontend
+        pool:
+          name: SelfHosted-Mac
+        steps:
+          - task: UseNode@1 # https://learn.microsoft.com/ja-jp/azure/devops/pipelines/tasks/reference/use-node-v1?view=azure-pipelines
+            inputs: { version: "24.x" } # volta pin / Dockerfileと揃える
+          - script: |
+              cd frontend
+              npm ci
+              npm run format:check
+              npm run lint
+              npm run build
+            displayName: lint & build (frontend)
