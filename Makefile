@@ -39,15 +39,15 @@ test-db: ## テスト用データベースを作成(初回のみ)
 	  -c "CREATE DATABASE $(POSTGRES_DB)_test;"
 
 lint: ## lint
-	docker compose exec api ruff check .
-	docker compose exec api ruff format --check .
+	docker compose exec api ruff check --no-cache .
+	docker compose exec api ruff format --no-cache --check .
 
 format: ## 自動整形
 	docker compose exec api ruff check --fix .
 	docker compose exec api ruff format .
 
 test:  ## テスト (--junit-xml: Azure DevOps PublishTestResultsタスク用)
-	docker compose exec api pytest -q --junit-xml=results.xml
+	docker compose exec api pytest -q --junit-xml=/tmp/results.xml
 
 ci: lint test ## CIと同じ検査をまとめて実行
 

@@ -13,8 +13,7 @@ stages:
     displayName: lint & test
     jobs:
       - job: api
-        pool:
-          name: SelfHosted-Mac # 別途作成したSelf Hosted Agent
+        pool: { vmImage: ubuntu-latest }
         steps:
           - script: |
               cp .env.example .env
@@ -32,6 +31,9 @@ stages:
             displayName: create test database
           - script: make ci
             displayName: lint & test (apiコンテナ内で実行)
+          - script: docker compose cp api:/tmp/results.xml api/results.xml
+            condition: always()
+            displayName: copy test results from container
           - task: PublishTestResults@2 # https://learn.microsoft.com/ja-jp/azure/devops/pipelines/tasks/reference/publish-test-results-v2?view=azure-pipelines&tabs=trx%2Ctrxattachments%2Cyaml
             condition: always()
             inputs:
@@ -42,8 +44,7 @@ stages:
             displayName: cleanup (ボリュームごと破棄)
 
       - job: frontend
-        pool:
-          name: SelfHosted-Mac
+        pool: { vmImage: ubuntu-latest }
         steps:
           - task: UseNode@1 # https://learn.microsoft.com/ja-jp/azure/devops/pipelines/tasks/reference/use-node-v1?view=azure-pipelines
             inputs: { version: "24.x" } # volta pin / Dockerfileと揃える
