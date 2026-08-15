@@ -46,7 +46,7 @@ stages:
           name: SelfHosted-Mac
         steps:
           - task: UseNode@1 # https://learn.microsoft.com/ja-jp/azure/devops/pipelines/tasks/reference/use-node-v1?view=azure-pipelines
-            inputs: { versionSpec: "24.x" } # volta pin / Dockerfileと揃える
+            inputs: { version: "24.x" } # volta pin / Dockerfileと揃える
           - script: |
               cd frontend
               npm ci
