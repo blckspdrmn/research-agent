@@ -47,7 +47,7 @@ format: ## 自動整形
 	docker compose exec api ruff format .
 
 test:  ## テスト (--junit-xml: Azure DevOps PublishTestResultsタスク用)
-	docker compose exec api pytest -q --junit-xml=results.xml
+	docker compose exec api pytest -q --junit-xml=/tmp/results.xml
 
 ci: lint test ## CIと同じ検査をまとめて実行
 

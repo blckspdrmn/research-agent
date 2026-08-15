@@ -31,6 +31,9 @@ stages:
             displayName: create test database
           - script: make ci
             displayName: lint & test (apiコンテナ内で実行)
+          - script: docker compose cp api:/tmp/results.xml api/results.xml
+            condition: always()
+            displayName: copy test results from container
           - task: PublishTestResults@2 # https://learn.microsoft.com/ja-jp/azure/devops/pipelines/tasks/reference/publish-test-results-v2?view=azure-pipelines&tabs=trx%2Ctrxattachments%2Cyaml
             condition: always()
             inputs:
