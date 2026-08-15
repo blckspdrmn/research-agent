@@ -11,8 +11,13 @@ COPY --from=ghcr.io/astral-sh/uv:0.12.3 /uv /usr/local/bin/uv
 # 以降のコマンドが実行される基準となるディレクトリ
 WORKDIR /app
 
+# 仮想環境の作成先を/app配下ではなく/opt/venvにする
+# compose.yamlの ./api:/app バインドマウントと領域が重ならないようにするため
+# なお後続のdev-builderステージ(FROM builder)はこのENVを引き継ぐので再指定は不要
+ENV UV_PROJECT_ENVIRONMENT=/opt/venv
+
 # 依存の再インストールが起こらないように先に依存インストール（レイヤーキャッシュを効かせる）
-# /app/.venvが作成される。--no-devで本番に不要なruff/pytest等は入れない
+# /opt/venvが作成される。--no-devで本番に不要なruff/pytest等は入れない
 COPY pyproject.toml uv.lock ./
 RUN uv sync --frozen --no-dev
 
@@ -35,7 +40,7 @@ WORKDIR /app
 # ①$PATHの先頭に仮想環境内のbinを追加（後で用いるuvicornコマンドが見つかるようになる）
 # ②Pythonのコンパイル結果のキャッシュを無効化（コンテナは使い捨てなので恩恵がない）
 # ③Pythonのログバッファリング（ある程度たまってから出力）を止めてリアルタイム出力化
-ENV PATH="/app/.venv/bin:$PATH" \
+ENV PATH="/opt/venv/bin:$PATH" \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
@@ -48,7 +53,7 @@ FROM base AS dev
 
 # dev-builderから仮想環境をコピー(ruff/pytest等の開発ツールも含む)
 # まだroot実行権限なのでディレクトリをコピーできる
-COPY --from=dev-builder /app/.venv /app/.venv
+COPY --from=dev-builder /opt/venv /opt/venv
 
 # 実行者をappuserに切り替える
 USER appuser
@@ -66,7 +71,7 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
 FROM base AS production
 
 # builderから仮想環境だけをコピー(uv本体やビルドキャッシュ、devツールは持ち込まない)
-COPY --from=builder /app/.venv /app/.venv
+COPY --from=builder /opt/venv /opt/venv
 
 USER appuser
 

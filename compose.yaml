@@ -29,11 +29,28 @@ services:
       TEST_DATABASE_URL: postgresql+psycopg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}_test
     volumes:
       - ./api:/app # /app全体をホストのapi/で覆う（bind mount）ことでホスト側でコードを編集した瞬間、コンテナの/appにも即座に反映される（--reloadとの合わせ技）
-      - api_venv:/app/.venv # /app/.venvだけ別のボリュームで覆う（ホスト側の.venvがコンテナのLinux用.venvを上書きしないように）
+      # 仮想環境はDockerfileで/opt/venvに作っており、このバインドマウントの範囲外
+      # （ホスト側のapi/.venvは/app/.venvとして見えるがPATHが通っていないため参照されない）
     depends_on:
       db: # dbが起動完了してからapiを起動
         condition: service_healthy
 
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3001:3000"
+    environment:
+      API_URL_INTERNAL: http://api:8000
+    volumes:
+      - ./frontend:/app
+      - frontend_node_modules:/app/node_modules
+      - frontend_next:/app/.next # ビルド生成物
+    depends_on:
+      - api
+
 volumes: # 名前つきボリュームの実体を宣言すると作成してくれる
   pgdata:
-  api_venv:
+  frontend_node_modules:
+  frontend_next:
