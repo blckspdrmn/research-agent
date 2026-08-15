@@ -13,8 +13,7 @@ stages:
     displayName: lint & test
     jobs:
       - job: api
-        pool:
-          name: SelfHosted-Mac # 別途作成したSelf Hosted Agent
+        pool: { vmImage: ubuntu-latest }
         steps:
           - script: |
               cp .env.example .env
@@ -42,8 +41,7 @@ stages:
             displayName: cleanup (ボリュームごと破棄)
 
       - job: frontend
-        pool:
-          name: SelfHosted-Mac
+        pool: { vmImage: ubuntu-latest }
         steps:
           - task: UseNode@1 # https://learn.microsoft.com/ja-jp/azure/devops/pipelines/tasks/reference/use-node-v1?view=azure-pipelines
             inputs: { version: "24.x" } # volta pin / Dockerfileと揃える
