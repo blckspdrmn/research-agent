@@ -20,9 +20,14 @@ async def execute_research(
     if theme is None:
         raise HTTPException(status_code=404, detail="Theme not found")
 
-    content_md = await run_research(theme.title, theme.description)
+    research_result = await run_research(theme.title, theme.description)
     report = models.Report(
-        theme_id=theme.id, content_md=content_md, status=models.ReportStatus.COMPLETED
+        theme_id=theme.id,
+        content_md=research_result["content_md"],
+        status=models.ReportStatus.COMPLETED,
+        total_input_tokens=research_result["total_input_tokens"],
+        total_output_tokens=research_result["total_output_tokens"],
+        llm_call_count=research_result["llm_call_count"],
     )
     db.add(report)
     await db.commit()

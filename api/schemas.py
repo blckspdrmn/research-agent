@@ -38,5 +38,8 @@ class ReportOut(BaseModel):
     content_md: str
     status: ReportStatus
     created_at: datetime
+    total_input_tokens: int | None = None
+    total_output_tokens: int | None = None
+    llm_call_count: int | None = None
 
     model_config = {"from_attributes": True}

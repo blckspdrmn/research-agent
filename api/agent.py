@@ -1,4 +1,5 @@
 from langchain.agents import create_agent
+from langchain_core.messages import AIMessage
 from langchain_tavily import TavilySearch
 
 from llm import get_chat_model
@@ -33,4 +34,17 @@ async def run_research(theme_title: str, theme_description: str | None) -> str:
         task += f"\n補足: {theme_description}"
 
     result = await agent.ainvoke({"messages": [("user", task)]})
-    return result["messages"][-1].content
+    messages = result["messages"]
+
+    ai_messages = [
+        m for m in messages if isinstance(m, AIMessage)
+    ]  # トークン算定のためにAIMessageだけ抽出
+    total_input = sum(m.usage_metadata.get("input_tokens", 0) for m in ai_messages)
+    total_output = sum(m.usage_metadata.get("output_tokens", 0) for m in ai_messages)
+
+    return {
+        "content_md": messages[-1].content,
+        "total_input_tokens": total_input,
+        "total_output_tokens": total_output,
+        "llm_call_count": len(ai_messages),
+    }
