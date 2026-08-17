@@ -81,6 +81,10 @@ class Report(Base):
         default=ReportStatus.PENDING,
         index=True,
     )
+    error_message: Mapped[str | None] = mapped_column(String(500), default=None)
+    total_input_tokens: Mapped[int | None] = mapped_column(default=None)
+    total_output_tokens: Mapped[int | None] = mapped_column(default=None)
+    llm_call_count: Mapped[int | None] = mapped_column(default=None)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )
