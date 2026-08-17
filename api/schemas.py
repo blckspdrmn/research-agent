@@ -3,6 +3,8 @@ from datetime import datetime
 
 from pydantic import BaseModel, Field
 
+from models import ReportStatus
+
 
 class ThemeCreate(BaseModel):
     """テーマ作成時のリクエストボディ"""
@@ -28,3 +30,13 @@ class ThemeOut(BaseModel):
     updated_at: datetime
 
     model_config = {"from_attributes": True}  # SQLAlchemyモデル→Pydanticの変換を許可
+
+
+class ReportOut(BaseModel):
+    id: uuid.UUID
+    theme_id: uuid.UUID
+    content_md: str
+    status: ReportStatus
+    created_at: datetime
+
+    model_config = {"from_attributes": True}

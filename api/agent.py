@@ -23,7 +23,7 @@ async def run_research(theme_title: str, theme_description: str | None) -> str:
     )
 
     agent = create_agent(
-        model=get_chat_model(),
+        model=get_chat_model(max_completion_tokens=1500),
         tools=[search_tool],
         system_prompt=SYSTEM_PROMPT,
     )
