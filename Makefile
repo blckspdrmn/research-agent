@@ -19,7 +19,7 @@ restart-api: ## apiコンテナを再起動(api/.env変更を反映させたい�
 	docker compose restart api
 
 api-logs: ## apiのログを追う
-	docker compose logs -f api
+	docker compose logs -f -t api
 
 ps: ## コンテナの状態
 	docker compose ps
