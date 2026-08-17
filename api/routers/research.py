@@ -4,6 +4,7 @@ import uuid
 from typing import Annotated
 
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 import models
@@ -48,6 +49,21 @@ async def _run_and_save(
             await db.commit()
         except Exception:  # research中にthemeが消されたことによりreportも消えた時など
             logger.exception("commit failed: report_id=%s", report_id)
+
+
+@router.get("/themes/{theme_id}/reports", response_model=list[ReportOut])
+async def list_reports(
+    theme_id: uuid.UUID, db: Annotated[AsyncSession, Depends(get_db)]
+):
+    theme = await db.get(models.Theme, theme_id)
+    if theme is None:
+        raise HTTPException(status_code=404, detail="Theme not found")
+    stmt = (
+        select(models.Report)
+        .where(models.Report.theme_id == theme_id)
+        .order_by(models.Report.created_at.desc())
+    )
+    return (await db.scalars(stmt)).all()
 
 
 @router.post("/themes/{theme_id}/research", response_model=ReportOut, status_code=202)
