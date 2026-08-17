@@ -1,6 +1,6 @@
 import uuid
 
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     azure_openai_api_key: str
     azure_openai_chat_deployment: str
     dummy_user_id: uuid.UUID  # TODO: のちほど認証を入れたら削除する
-    model_config = {"env_file": ".env"}
+    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
 
 settings = Settings()
