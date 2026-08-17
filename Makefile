@@ -1,7 +1,7 @@
 include .env
 export
 
-.PHONY: help build up down restart-api api-logs ps migrate revision seed test-db lint format test ci shell-api psql down-clean
+.PHONY: help build up down restart-api api-logs ps migrate revision seed test-db lint format test ci shell-api psql down-clean npm-install
 
 help: ## コマンド一覧を表示
 	@grep -hE '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -56,6 +56,9 @@ shell-api: ## apiコンテナに入る
 
 psql: ## psqlに入る
 	docker compose exec db psql -U $(POSTGRES_USER) -d $(POSTGRES_DB)
+
+npm-install: ## frontendコンテナ内でnpm install(パッケージ追加後に実行)
+	docker compose exec frontend npm install
 
 down-clean: ## 停止&ボリュームも削除してまっさらに(環境が自動破棄されないSelf Hosted AgentによるCI用)
 	docker compose down -v --remove-orphans
