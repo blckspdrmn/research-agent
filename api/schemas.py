@@ -37,6 +37,7 @@ class ReportOut(BaseModel):
     theme_id: uuid.UUID
     content_md: str
     status: ReportStatus
+    error_message: str | None = None
     created_at: datetime
     total_input_tokens: int | None = None
     total_output_tokens: int | None = None
