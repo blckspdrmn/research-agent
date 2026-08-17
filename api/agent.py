@@ -16,7 +16,7 @@ SYSTEM_PROMPT = """あなたはリサーチアシスタントです。
 """
 
 
-async def run_research(theme_title: str, theme_description: str | None) -> str:
+async def run_research(theme_title: str, theme_description: str | None) -> dict:
     """テーマについてリサーチし、Markdownレポートを返す"""
     search_tool = TavilySearch(
         max_results=5,
