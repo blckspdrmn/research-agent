@@ -1,12 +1,13 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { ApiError } from "@/lib/api/client";
 import {
-  ApiError,
   createThemeRequest,
   deleteThemeRequest,
   updateThemeRequest,
-} from "@/lib/api";
+} from "@/lib/api/themes";
+import { runResearchRequest } from "@/lib/api/reports";
 
 import type { FormState } from "./form-state";
 
@@ -97,5 +98,21 @@ export async function deleteTheme(
     throw e;
   }
   revalidatePath("/themes");
+  return { status: "success", message: null };
+}
+
+export async function runResearch(
+  id: string,
+  _prevState: FormState,
+): Promise<FormState> {
+  try {
+    await runResearchRequest(id);
+  } catch (e) {
+    if (e instanceof ApiError && e.status === 404) {
+      return { status: "error", message: "このテーマは既に削除されています" };
+    }
+    throw e;
+  }
+  revalidatePath(`/themes/${id}`);
   return { status: "success", message: null };
 }

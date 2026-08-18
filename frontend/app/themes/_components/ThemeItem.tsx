@@ -1,9 +1,11 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import type { Theme } from "@/lib/api";
+import Link from "next/link";
+import type { Theme } from "@/lib/types";
 import { EditThemeForm } from "./EditThemeForm";
 import { DeleteThemeButton } from "./DeleteThemeButton";
+import { RunResearchButton } from "./RunResearchButton";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -12,21 +14,36 @@ export function ThemeItem({ theme }: { theme: Theme }) {
   const handleDone = useCallback(() => setIsEditing(false), []);
 
   return (
-    <Card>
-      <CardContent className="p-4">
-        {isEditing ? (
+    <Card className="flex flex-col">
+      {isEditing ? (
+        <CardContent className="flex flex-1 flex-col px-5 pb-5 pt-4">
           <EditThemeForm theme={theme} onDone={handleDone} />
-        ) : (
-          <div className="flex items-center justify-between gap-4">
-            <div>
-              <span className="font-medium">{theme.title}</span>
-              {theme.description && (
-                <span className="ml-2 text-sm text-muted-foreground">
-                  {theme.description}
-                </span>
-              )}
-            </div>
-            <div className="flex shrink-0 gap-2">
+        </CardContent>
+      ) : (
+        <>
+          <div className="flex items-start justify-between gap-2 px-5 pt-4">
+            <Link
+              href={`/themes/${theme.id}`}
+              className="font-semibold hover:underline"
+            >
+              {theme.title}
+            </Link>
+          </div>
+          <CardContent className="flex flex-1 flex-col gap-3 px-5 pb-5 pt-3">
+            <p className="min-h-[2.6em] text-sm text-muted-foreground">
+              {theme.description ?? ""}
+            </p>
+            <p className="text-xs text-muted-foreground">
+              更新{" "}
+              {new Date(theme.updated_at).toLocaleDateString("ja-JP", {
+                timeZone: "Asia/Tokyo",
+              })}
+            </p>
+            <div className="mt-auto flex gap-2">
+              <Link href={`/themes/${theme.id}`}>
+                <Button size="sm">詳細</Button>
+              </Link>
+              <RunResearchButton id={theme.id} />
               <Button
                 variant="outline"
                 size="sm"
@@ -36,9 +53,9 @@ export function ThemeItem({ theme }: { theme: Theme }) {
               </Button>
               <DeleteThemeButton id={theme.id} />
             </div>
-          </div>
-        )}
-      </CardContent>
+          </CardContent>
+        </>
+      )}
     </Card>
   );
 }

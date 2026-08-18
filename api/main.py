@@ -1,10 +1,10 @@
 from fastapi import FastAPI
 
-from routers import llm_test, themes
+from routers import research, themes
 
 app = FastAPI(title="Research Agent API")
 app.include_router(themes.router)
-app.include_router(llm_test.router)
+app.include_router(research.router)
 
 
 @app.get("/health")

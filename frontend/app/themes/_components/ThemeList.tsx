@@ -1,4 +1,4 @@
-import type { Theme } from "@/lib/api";
+import type { Theme } from "@/lib/types";
 import { ThemeItem } from "./ThemeItem";
 
 export function ThemeList({ themes }: { themes: Theme[] }) {
@@ -11,12 +11,10 @@ export function ThemeList({ themes }: { themes: Theme[] }) {
   }
 
   return (
-    <ul className="space-y-2">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
       {themes.map((theme) => (
-        <li key={theme.id}>
-          <ThemeItem theme={theme} />
-        </li>
+        <ThemeItem key={theme.id} theme={theme} />
       ))}
-    </ul>
+    </div>
   );
 }

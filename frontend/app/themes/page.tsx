@@ -1,4 +1,6 @@
-import { fetchThemes } from "@/lib/api";
+export const dynamic = "force-dynamic";
+
+import { fetchThemes } from "@/lib/api/themes";
 import { CreateThemeForm } from "./_components/CreateThemeForm";
 import { ThemeList } from "./_components/ThemeList";
 import {
@@ -13,7 +15,7 @@ export default async function ThemesPage() {
   const themes = await fetchThemes();
 
   return (
-    <main className="mx-auto max-w-2xl space-y-6 p-6">
+    <main className="mx-auto max-w-5xl space-y-8 p-6">
       <h1 className="text-2xl font-bold">リサーチテーマ</h1>
 
       <Card>

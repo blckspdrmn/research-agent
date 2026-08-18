@@ -29,7 +29,7 @@ stages:
             displayName: start containers (docker compose)
           - script: make test-db
             displayName: create test database
-          - script: make ci
+          - script: make ci-api
             displayName: lint & test (apiコンテナ内で実行)
           - script: docker compose cp api:/tmp/results.xml api/results.xml
             condition: always()
