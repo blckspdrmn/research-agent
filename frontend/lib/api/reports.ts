@@ -1,8 +1,9 @@
 import type { Report } from "@/lib/types";
-import { API_URL, ApiError } from "./client";
+import { getApiUrl, ApiError } from "./client";
 
 export async function fetchReports(themeId: string): Promise<Report[]> {
-  const res = await fetch(`${API_URL}/themes/${themeId}/reports`, {
+  const baseUrl = getApiUrl();
+  const res = await fetch(`${baseUrl}/themes/${themeId}/reports`, {
     cache: "no-store",
   });
   if (!res.ok) throw new ApiError(res.status);
@@ -10,7 +11,8 @@ export async function fetchReports(themeId: string): Promise<Report[]> {
 }
 
 export async function runResearchRequest(themeId: string): Promise<void> {
-  const res = await fetch(`${API_URL}/themes/${themeId}/research`, {
+  const baseUrl = getApiUrl();
+  const res = await fetch(`${baseUrl}/themes/${themeId}/research`, {
     method: "POST",
   });
   if (!res.ok) throw new ApiError(res.status);
