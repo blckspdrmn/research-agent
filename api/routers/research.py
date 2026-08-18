@@ -28,6 +28,8 @@ async def _run_and_save(
         if report is None:
             logger.error("report not found: report_id=%s", report_id)
             return
+        report.status = models.ReportStatus.RUNNING
+        await db.commit()
         try:
             async with asyncio.timeout(RESEARCH_TIMEOUT_SECONDS):
                 research_result = await run_research(title, description)
