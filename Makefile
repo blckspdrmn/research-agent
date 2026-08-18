@@ -1,7 +1,7 @@
 include .env
 export
 
-.PHONY: help build up down restart-api api-logs ps migrate revision seed test-db lint format test ci ci-frontend shell-api psql down-clean npm-install
+.PHONY: help build up down restart-api api-logs ps migrate revision seed test-db lint format test ci ci-api ci-frontend shell-api psql down-clean npm-install
 
 help: ## コマンド一覧を表示
 	@grep -hE '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -49,7 +49,9 @@ format: ## 自動整形
 test:  ## テスト (--junit-xml: Azure DevOps PublishTestResultsタスク用)
 	docker compose exec api pytest -q --junit-xml=/tmp/results.xml
 
-ci: lint test ci-frontend ## CIと同じ検査をまとめて実行
+ci: ci-api ci-frontend ## CIと同じ検査をまとめて実行
+
+ci-api: lint test ## APIのlint・テスト（CIでも利用）
 
 ci-frontend: ## フロントエンドのlint・build（CIと同じ検査）
 	cd frontend && npm run format:check && npm run lint && npm run build
