@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import Link from "next/link";
 import { fetchTheme } from "@/lib/api/themes";
 import { fetchReports } from "@/lib/api/reports";

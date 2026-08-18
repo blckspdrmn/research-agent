@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { fetchThemes } from "@/lib/api/themes";
 import { CreateThemeForm } from "./_components/CreateThemeForm";
 import { ThemeList } from "./_components/ThemeList";
