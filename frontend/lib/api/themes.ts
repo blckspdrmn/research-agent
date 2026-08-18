@@ -1,23 +1,14 @@
-export const API_URL = process.env.API_URL_INTERNAL ?? "http://localhost:8000";
-
-export type Theme = {
-  id: string;
-  title: string;
-  description: string | null;
-  created_at: string;
-  updated_at: string;
-};
-
-// APIエラーを定義し、呼び出し側でstatusごとに分岐できるように
-export class ApiError extends Error {
-  constructor(public status: number) {
-    super(`API error: ${status}`);
-    this.name = "ApiError";
-  }
-}
+import type { Theme } from "@/lib/types";
+import { API_URL, ApiError } from "./client";
 
 export async function fetchThemes(): Promise<Theme[]> {
   const res = await fetch(`${API_URL}/themes`, { cache: "no-store" });
+  if (!res.ok) throw new ApiError(res.status);
+  return res.json();
+}
+
+export async function fetchTheme(id: string): Promise<Theme> {
+  const res = await fetch(`${API_URL}/themes/${id}`, { cache: "no-store" });
   if (!res.ok) throw new ApiError(res.status);
   return res.json();
 }
