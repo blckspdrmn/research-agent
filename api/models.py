@@ -2,12 +2,20 @@ import enum
 import uuid
 from datetime import datetime
 
-from sqlalchemy import DateTime, Enum, ForeignKey, String, Text, Uuid, func, text
+from sqlalchemy import ARRAY, DateTime, Enum, ForeignKey, String, Text, Uuid, func, text
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
 class Base(DeclarativeBase):
     pass
+
+
+class ReportDepth(enum.StrEnum):
+    """レポートの詳細度"""
+
+    SUMMARY = "summary"
+    STANDARD = "standard"
+    DETAILED = "detailed"
 
 
 class ReportStatus(enum.StrEnum):
@@ -45,6 +53,20 @@ class Theme(Base):
         ForeignKey("users.id", ondelete="CASCADE"), index=True
     )
     title: Mapped[str] = mapped_column(String(100))
+    preferred_domains: Mapped[list[str] | None] = mapped_column(
+        ARRAY(String(255)), default=None
+    )
+    report_depth: Mapped[ReportDepth] = mapped_column(
+        Enum(
+            ReportDepth,
+            native_enum=False,
+            length=20,
+            create_constraint=True,
+            name="ck_themes_report_depth",
+            values_callable=lambda enum_cls: [m.value for m in enum_cls],
+        ),
+        default=ReportDepth.STANDARD,
+    )
     description: Mapped[str | None] = mapped_column(Text, default=None)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()

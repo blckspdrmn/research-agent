@@ -3,13 +3,15 @@ from datetime import datetime
 
 from pydantic import BaseModel, Field
 
-from models import ReportStatus
+from models import ReportDepth, ReportStatus
 
 
 class ThemeCreate(BaseModel):
     """テーマ作成時のリクエストボディ"""
 
     title: str = Field(min_length=1, max_length=100)
+    preferred_domains: list[str] | None = None
+    report_depth: ReportDepth = Field(default=ReportDepth.STANDARD)
     description: str | None = None
 
 
@@ -17,6 +19,8 @@ class ThemeUpdate(BaseModel):
     """更新時。全項目省略可(部分更新)"""
 
     title: str | None = Field(default=None, min_length=1, max_length=100)
+    preferred_domains: list[str] | None = None
+    report_depth: ReportDepth | None = Field(default=None)
     description: str | None = None
 
 
@@ -25,6 +29,8 @@ class ThemeOut(BaseModel):
 
     id: uuid.UUID
     title: str
+    preferred_domains: list[str] | None
+    report_depth: ReportDepth
     description: str | None
     created_at: datetime
     updated_at: datetime
