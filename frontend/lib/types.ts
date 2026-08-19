@@ -1,6 +1,10 @@
+export type ReportDepth = "summary" | "standard" | "detailed";
+
 export type Theme = {
   id: string;
   title: string;
+  preferred_domains: string[] | null;
+  report_depth: ReportDepth;
   description: string | null;
   created_at: string;
   updated_at: string;

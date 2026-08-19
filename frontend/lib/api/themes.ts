@@ -17,6 +17,8 @@ export async function fetchTheme(id: string): Promise<Theme> {
 
 export async function createThemeRequest(input: {
   title: string;
+  preferred_domains: string[] | null;
+  report_depth: string;
   description: string | null;
 }): Promise<void> {
   const baseUrl = getApiUrl();
@@ -30,7 +32,12 @@ export async function createThemeRequest(input: {
 
 export async function updateThemeRequest(
   id: string,
-  input: { title?: string; description?: string | null },
+  input: {
+    title?: string;
+    preferred_domains?: string[] | null;
+    report_depth?: string;
+    description?: string | null;
+  },
 ): Promise<void> {
   const baseUrl = getApiUrl();
   const res = await fetch(`${baseUrl}/themes/${id}`, {

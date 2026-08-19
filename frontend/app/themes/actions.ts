@@ -13,15 +13,21 @@ import type { FormState } from "./form-state";
 
 function parseThemeForm(formData: FormData): {
   title: string;
+  preferred_domains: string[] | null;
+  report_depth: string;
   description: string | null;
   error?: FormState;
 } {
   const title = String(formData.get("title") ?? "").trim();
+  const domainsRaw = String(formData.get("preferred_domains") ?? "").trim();
+  const report_depth = String(formData.get("report_depth") ?? "standard");
   const description = String(formData.get("description") ?? "").trim();
 
   if (title.length === 0) {
     return {
       title,
+      preferred_domains: null,
+      report_depth,
       description: null,
       error: { status: "error", message: "テーマ名を入力してください" },
     };
@@ -29,6 +35,8 @@ function parseThemeForm(formData: FormData): {
   if (title.length > 100) {
     return {
       title,
+      preferred_domains: null,
+      report_depth,
       description: null,
       error: {
         status: "error",
@@ -37,18 +45,37 @@ function parseThemeForm(formData: FormData): {
     };
   }
 
-  return { title, description: description || null };
+  // カンマ区切りでドメインを分割、空文字を除去
+  const preferred_domains = domainsRaw
+    ? domainsRaw
+        .split(",")
+        .map((d) => d.trim())
+        .filter(Boolean)
+    : null;
+
+  return {
+    title,
+    preferred_domains,
+    report_depth,
+    description: description || null,
+  };
 }
 
 export async function createTheme(
   _prevState: FormState,
   formData: FormData,
 ): Promise<FormState> {
-  const { title, description, error } = parseThemeForm(formData);
+  const { title, preferred_domains, report_depth, description, error } =
+    parseThemeForm(formData);
   if (error) return error;
 
   try {
-    await createThemeRequest({ title, description });
+    await createThemeRequest({
+      title,
+      preferred_domains,
+      report_depth,
+      description,
+    });
   } catch (e) {
     if (e instanceof ApiError && e.status === 422) {
       // 422はPydanticバリデーションエラーのステータスコード
@@ -66,11 +93,17 @@ export async function updateTheme(
   _prevState: FormState,
   formData: FormData,
 ): Promise<FormState> {
-  const { title, description, error } = parseThemeForm(formData);
+  const { title, preferred_domains, report_depth, description, error } =
+    parseThemeForm(formData);
   if (error) return error;
 
   try {
-    await updateThemeRequest(id, { title, description: description || null });
+    await updateThemeRequest(id, {
+      title,
+      preferred_domains,
+      report_depth,
+      description,
+    });
   } catch (e) {
     if (e instanceof ApiError && e.status === 404) {
       return { status: "error", message: "このテーマは既に削除されています" };
