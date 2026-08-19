@@ -8,7 +8,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 import models
-from agent import run_research
+from agent_graph import run_research
 from database import SessionLocal, get_db
 from schemas import ReportOut
 
