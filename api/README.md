@@ -90,6 +90,21 @@ make restart-api
 >
 > **⚠️ Docker Compose環境でDBを作り直したとき(`docker compose down -v`など)は、この手順をやり直すこと。** 新しいDBでは`DUMMY_USER_ID`が指すユーザーが存在しなくなり、`POST /themes`等が`ForeignKeyViolation`で500エラーになる。
 
+## ストレージ (Azurite)
+
+ローカルでは Azure Storage のエミュレータ **Azurite** を compose で起動する (Blob: 10000 / Queue: 10001)。接続情報は compose.yaml の `environment:` に直書きしており、キーは Azurite の公開された固定値なので秘密ではない。
+
+Blob コンテナは自動作成されないため、一度だけ手で作る。
+
+```bash
+export AZURITE_CONN="DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://localhost:10000/devstoreaccount1;"
+
+az storage container create --name reports --connection-string "$AZURITE_CONN"
+az storage container list --connection-string "$AZURITE_CONN" -o table
+```
+
+> **⚠️ `docker compose down -v` でボリュームを消したときは、この手順をやり直すこと。** `reports` コンテナが無い状態で書き込むと `ContainerNotFound` になる。
+
 ## 起動
 
 リポジトリルートで `make up`(詳細は[データベース](#データベース-postgresql)節、および[ルートの README](../README.md))。`api` コンテナは `--reload` 付きで起動しており、ホスト側 (`./api`) のファイル編集が即座に反映される。
