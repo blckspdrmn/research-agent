@@ -13,7 +13,7 @@ from models import Base
 # access to the values within the .ini file in use.
 config = context.config
 # alembic.iniのsqlalchemy.urlは使わず、.envから読む(パスワードをiniに書かないため)
-config.set_main_option("sqlalchemy.url", settings.database_url)
+config.set_main_option("sqlalchemy.url", settings.database_url.replace("%", "%%"))
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
