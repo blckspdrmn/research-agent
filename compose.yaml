@@ -73,6 +73,22 @@ services:
       timeout: 3s
       retries: 10
 
+  worker:
+    build:
+      context: ./api
+      target: dev
+    command: python -m worker
+    env_file: ./api/.env
+    environment:
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+      AZURE_STORAGE_CONNECTION_STRING: "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://azurite:10000/devstoreaccount1;QueueEndpoint=http://azurite:10001/devstoreaccount1;"
+      WORKER_POLL: "1"
+    volumes:
+      - ./api:/app
+    depends_on:
+      db: { condition: service_healthy }
+      azurite: { condition: service_healthy }
+
 volumes: # 名前つきボリュームの実体を宣言すると作成してくれる
   pgdata:
   frontend_node_modules:

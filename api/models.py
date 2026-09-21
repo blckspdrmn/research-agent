@@ -85,6 +85,10 @@ class Report(Base):
     total_input_tokens: Mapped[int | None] = mapped_column(default=None)
     total_output_tokens: Mapped[int | None] = mapped_column(default=None)
     llm_call_count: Mapped[int | None] = mapped_column(default=None)
+    attempt_count: Mapped[int] = mapped_column(server_default=text("0"))
+    lease_until: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True), default=None
+    )
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )

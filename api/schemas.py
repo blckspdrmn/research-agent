@@ -44,3 +44,9 @@ class ReportOut(BaseModel):
     llm_call_count: int | None = None
 
     model_config = {"from_attributes": True}
+
+
+class ResearchJob(BaseModel):
+    report_id: uuid.UUID
+    theme_title: str
+    theme_description: str | None = None
