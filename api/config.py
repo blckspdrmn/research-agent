@@ -9,6 +9,8 @@ class Settings(BaseSettings):
     azure_openai_base_url: str
     azure_openai_api_key: str
     azure_openai_chat_deployment: str
+    # Queue接続用。ローカルはAzurite、本番はStorage Accountの接続文字列
+    azure_storage_connection_string: str
     dummy_user_id: uuid.UUID  # TODO: のちほど認証を入れたら削除する
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 

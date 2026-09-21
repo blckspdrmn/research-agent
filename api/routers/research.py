@@ -1,56 +1,19 @@
-import asyncio
 import logging
 import uuid
 from typing import Annotated
 
-from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
-from sqlalchemy import select
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy import select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
 import models
-from agent_graph import run_research
-from database import SessionLocal, get_db
-from schemas import ReportOut
+from database import get_db
+from job_queue import enqueue_research
+from schemas import ReportOut, ResearchJob
 
 router = APIRouter(tags=["research"])
 
 logger = logging.getLogger(__name__)
-
-RESEARCH_TIMEOUT_SECONDS = 300
-
-
-async def _run_and_save(
-    report_id: uuid.UUID, title: str, description: str | None
-) -> None:
-    """リサーチ処理をバックグラウンドタスクとして実行"""
-    async with SessionLocal() as db:
-        report = await db.get(models.Report, report_id)
-        if report is None:
-            logger.error("report not found: report_id=%s", report_id)
-            return
-        report.status = models.ReportStatus.RUNNING
-        await db.commit()
-        try:
-            async with asyncio.timeout(RESEARCH_TIMEOUT_SECONDS):
-                research_result = await run_research(title, description)
-            report.content_md = research_result["content_md"]
-            report.status = models.ReportStatus.COMPLETED
-            report.total_input_tokens = research_result["total_input_tokens"]
-            report.total_output_tokens = research_result["total_output_tokens"]
-            report.llm_call_count = research_result["llm_call_count"]
-            logger.info("research completed: report_id=%s", report_id)
-        except TimeoutError:
-            report.status = models.ReportStatus.FAILED
-            report.error_message = "リサーチが制限時間内に完了しませんでした"
-            logger.warning("research timed out: report_id=%s", report_id)
-        except Exception:
-            report.status = models.ReportStatus.FAILED
-            report.error_message = "リサーチ中にエラーが発生しました"
-            logger.exception("research failed: report_id=%s", report_id)
-        try:
-            await db.commit()
-        except Exception:  # research中にthemeが消されたことによりreportも消えた時など
-            logger.exception("commit failed: report_id=%s", report_id)
 
 
 @router.get("/themes/{theme_id}/reports", response_model=list[ReportOut])
@@ -71,7 +34,6 @@ async def list_reports(
 @router.post("/themes/{theme_id}/research", response_model=ReportOut, status_code=202)
 async def execute_research(
     theme_id: uuid.UUID,
-    background_tasks: BackgroundTasks,
     db: Annotated[AsyncSession, Depends(get_db)],
 ):
     theme = await db.get(models.Theme, theme_id)
@@ -87,7 +49,30 @@ async def execute_research(
     await db.commit()
     await db.refresh(report)
 
-    background_tasks.add_task(
-        _run_and_save, report.id, theme.title, theme.description
-    )  # バックグラウンドタスクを予約
+    try:
+        await enqueue_research(
+            ResearchJob(
+                report_id=report.id,
+                theme_title=theme.title,
+                theme_description=theme.description,
+            )
+        )
+    except Exception:
+        logger.exception("enqueue failed: report_id=%s", report.id)
+        await db.execute(
+            update(models.Report)
+            .where(
+                models.Report.id == report.id,
+                models.Report.status == models.ReportStatus.PENDING,
+            )
+            .values(
+                status=models.ReportStatus.FAILED,
+                error_message="リサーチの受付に失敗しました",
+            )
+        )
+        await db.commit()
+        raise HTTPException(
+            status_code=503, detail="リサーチの受付に失敗しました"
+        ) from None
+
     return report
