@@ -99,9 +99,12 @@ stages:
               scriptLocation: inlineScript
               inlineScript: |
                 set -euo pipefail
-                # 新しいイメージを使い捨てのJobとして1回だけ起動する
+                # Jobの定義を新しいイメージへ更新する。
+                az containerapp job update -n api-migrate -g $(rgName) \
+                  --image $(acrName).azurecr.io/api:$(Build.BuildId) --output none
+
+                # 起動し、マイグレーションを実行する
                 EXEC=$(az containerapp job start -n api-migrate -g $(rgName) \
-                  --image $(acrName).azurecr.io/api:$(Build.BuildId) \
                   --query name -o tsv)
                 echo "started: $EXEC"
 
@@ -141,5 +144,5 @@ stages:
                         --image $(acrName).azurecr.io/frontend:$(Build.BuildId) --output none
                       az containerapp job update -n research-worker -g $(rgName) \
                         --image $(acrName).azurecr.io/api:$(Build.BuildId) --output none
-                      # api-migrateはMigrateステージで上書きされるから更新不要
+                      # api-migrateはMigrateステージで更新済
                   displayName: update api / frontend / research-worker
