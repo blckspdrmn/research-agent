@@ -8,6 +8,14 @@ pr:
   branches:
     include: [main]
 
+variables:
+  - name: acrName
+    value: resagentacr
+  - name: rgName
+    value: rg-research-agent
+  - name: azureServiceConnection
+    value: sc-research-agent # AzDO の Project Settings > Service connections で作成した名前
+
 stages:
   - stage: CI
     displayName: lint & test
@@ -55,3 +63,83 @@ stages:
               npm run lint
               npm run build
             displayName: lint & build (frontend)
+
+  # ---- ここからCD: mainへのマージ時だけ実行 ----
+  - stage: Build
+    displayName: build images to ACR
+    dependsOn: CI
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main')) # CIが成功かつmainのbuild時のみ実行（PR作成時はskip）
+    jobs:
+      - job: build_images
+        pool: { vmImage: ubuntu-latest }
+        steps:
+          - task: AzureCLI@2 # https://learn.microsoft.com/ja-jp/azure/devops/pipelines/tasks/reference/azure-cli-v2?view=azure-pipelines
+            inputs:
+              azureSubscription: $(azureServiceConnection)
+              scriptType: bash
+              scriptLocation: inlineScript
+              # set -euo pipefail: https://zenn.dev/pollenjp/articles/2026-03-29-bash-safe-scripting
+              inlineScript: |
+                set -euo pipefail
+                az acr build -r $(acrName) -t api:$(Build.BuildId) --target production ./api
+                az acr build -r $(acrName) -t frontend:$(Build.BuildId) ./frontend
+            displayName: az acr build (api / frontend)
+
+  - stage: Migrate
+    displayName: alembic upgrade head
+    dependsOn: Build
+    jobs:
+      - job: alembic
+        pool: { vmImage: ubuntu-latest }
+        steps:
+          - task: AzureCLI@2
+            inputs:
+              azureSubscription: $(azureServiceConnection)
+              scriptType: bash
+              scriptLocation: inlineScript
+              inlineScript: |
+                set -euo pipefail
+                # 新しいイメージを使い捨てのJobとして1回だけ起動する
+                EXEC=$(az containerapp job start -n api-migrate -g $(rgName) \
+                  --image $(acrName).azurecr.io/api:$(Build.BuildId) \
+                  --query name -o tsv)
+                echo "started: $EXEC"
+
+                # 上記startは「起動した」時点で返るため、migrationが失敗してもこのステージが緑になってしまうのを防ぐために完了を待つ（60*10sec=最大10min）
+                for i in $(seq 1 60); do
+                  STATUS=$(az containerapp job execution show -n api-migrate -g $(rgName) \
+                    --job-execution-name "$EXEC" --query properties.status -o tsv)
+                  echo "execution $EXEC: $STATUS"
+                  [ "$STATUS" = "Succeeded" ] && exit 0
+                  [ "$STATUS" = "Failed" ] && exit 1
+                  sleep 10
+                done
+                echo "migration timed out"; exit 1
+            displayName: run api-migrate job and wait
+
+  - stage: Deploy
+    displayName: update container apps
+    dependsOn: Migrate
+    jobs:
+      - deployment: deploy_api # deploy専用のjob
+        environment: production # AzDOのEnvironmentと紐づける
+        pool: { vmImage: ubuntu-latest }
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: AzureCLI@2
+                  inputs:
+                    azureSubscription: $(azureServiceConnection)
+                    scriptType: bash
+                    scriptLocation: inlineScript
+                    inlineScript: |
+                      set -euo pipefail
+                      az containerapp update -n api -g $(rgName) \
+                        --image $(acrName).azurecr.io/api:$(Build.BuildId) --output none
+                      az containerapp update -n frontend -g $(rgName) \
+                        --image $(acrName).azurecr.io/frontend:$(Build.BuildId) --output none
+                      az containerapp job update -n research-worker -g $(rgName) \
+                        --image $(acrName).azurecr.io/api:$(Build.BuildId) --output none
+                      # api-migrateはMigrateステージで上書きされるから更新不要
+                  displayName: update api / frontend / research-worker
