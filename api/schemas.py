@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from models import ReportStatus
 
@@ -9,15 +9,28 @@ from models import ReportStatus
 class ThemeCreate(BaseModel):
     """テーマ作成時のリクエストボディ"""
 
+    model_config = ConfigDict(extra="forbid")
+
     title: str = Field(min_length=1, max_length=100)
-    description: str | None = None
+    description: str | None = Field(default=None, max_length=500)
 
 
 class ThemeUpdate(BaseModel):
     """更新時。全項目省略可(部分更新)"""
 
+    model_config = ConfigDict(extra="forbid")
+
     title: str | None = Field(default=None, min_length=1, max_length=100)
-    description: str | None = None
+    description: str | None = Field(default=None, max_length=500)
+
+    # nullで明示的に更新したときだけバリデーションで弾く
+    @field_validator("title")
+    @classmethod
+    def reject_null_title(cls, value: str | None) -> str:
+        """省略は許すが、明示的なnullは拒否する（titleはNOT NULL）"""
+        if value is None:
+            raise ValueError("title cannot be null")
+        return value
 
 
 class ThemeOut(BaseModel):
