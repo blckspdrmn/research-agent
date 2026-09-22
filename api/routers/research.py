@@ -2,13 +2,14 @@ import logging
 import uuid
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy import select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
 import models
 from database import get_db
 from job_queue import enqueue_research
+from rate_limit import limiter
 from schemas import ReportOut, ResearchJob
 
 router = APIRouter(tags=["research"])
@@ -32,7 +33,9 @@ async def list_reports(
 
 
 @router.post("/themes/{theme_id}/research", response_model=ReportOut, status_code=202)
+@limiter.limit("3/minute")  # 連打対策
 async def execute_research(
+    request: Request,  # slowapi参照用に必要
     theme_id: uuid.UUID,
     db: Annotated[AsyncSession, Depends(get_db)],
 ):
