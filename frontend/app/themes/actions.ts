@@ -111,6 +111,14 @@ export async function runResearch(
     if (e instanceof ApiError && e.status === 404) {
       return { status: "error", message: "このテーマは既に削除されています" };
     }
+    // api/routers/research.py のレートリミットに合わせる
+    if (e instanceof ApiError && e.status === 429) {
+      return {
+        status: "error",
+        message:
+          "リサーチの実行が集中しています。1分ほど待って再実行してください",
+      };
+    }
     throw e;
   }
   revalidatePath(`/themes/${id}`);
