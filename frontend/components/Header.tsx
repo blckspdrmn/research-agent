@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { auth, signOut } from "@/auth";
+import { auth } from "@/auth";
 import { Button } from "@/components/ui/button";
 
 export async function Header() {
@@ -16,13 +16,7 @@ export async function Header() {
             <span className="text-sm text-muted-foreground">
               {session.user.email ?? "ログイン中"}
             </span>
-            {/* https://authjs.dev/getting-started/session-management/login#signout */}
-            <form
-              action={async () => {
-                "use server";
-                await signOut({ redirectTo: "/login" });
-              }}
-            >
+            <form action="/logout" method="post">
               <Button type="submit" variant="outline" size="sm">
                 ログアウト
               </Button>
