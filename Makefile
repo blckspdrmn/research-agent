@@ -1,7 +1,7 @@
 include .env
 export
 
-.PHONY: help build up down restart-api api-logs ps migrate revision seed test-db lint format test ci ci-api ci-frontend shell-api psql down-clean npm-install
+.PHONY: help build up down restart-api api-logs ps migrate revision test-db lint format test ci ci-api ci-frontend shell-api psql down-clean npm-install
 
 help: ## コマンド一覧を表示
 	@grep -hE '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -29,10 +29,6 @@ migrate: ## マイグレーションを適用
 
 revision: ## マイグレーションを自動生成(例: make revision m="add status")
 	docker compose exec api alembic revision --autogenerate -m "$(m)"
-
-seed: ## 開発用のダミーユーザーを投入(表示されたidをapi/.envのDUMMY_USER_IDに設定し、make restart-apiで反映すること)
-	docker compose exec db psql -U $(POSTGRES_USER) -d $(POSTGRES_DB) \
-	  -c "INSERT INTO users (email) VALUES ('dev@example.com') ON CONFLICT DO NOTHING RETURNING id;"
 
 test-db: ## テスト用データベースを作成(初回のみ)
 	docker compose exec db psql -U $(POSTGRES_USER) -d postgres \

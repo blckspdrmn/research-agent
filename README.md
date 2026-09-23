@@ -21,17 +21,12 @@ Docker Desktop / Node.js 24 / Python 3.12+ / uv / make（Macは標準）
 ```bash
 cp .env.example .env           # DBの認証情報（デフォルト値のままでよい）
 cp api/.env.example api/.env
-cp frontend/.env.local.example frontend/.env.local # Docker Compose経由なら不要
+cp frontend/.env.local.example frontend/.env.local # ログイン用の設定を記入する
 make up                        # 全コンテナ起動
 make migrate                   # DBスキーマ適用
-make seed                      # ダミーユーザー投入
 ```
 
-`make seed`が表示する`id`を`api/.env`の`DUMMY_USER_ID`に設定し(認証未実装のための暫定措置。詳細は[api/README](api/README.md)参照)、反映させる。
-
-```bash
-make restart-api
-```
+ログインにはMicrosoft Entra External IDを使う。事前にアプリ登録を行い、`api/.env`の`ENTRA_*`と`frontend/.env.local`の`AUTH_*`を設定しておく。ユーザーは初回ログイン時に自動で作成される。
 
 - フロント: http://localhost:3001
 - API（Swagger UI）: http://localhost:8000/docs
@@ -41,12 +36,13 @@ make restart-api
 | 変数                                                  | 用途                                   | 取得元                                         |
 | ----------------------------------------------------- | -------------------------------------- | ---------------------------------------------- |
 | `POSTGRES_USER` / `POSTGRES_PASSWORD` / `POSTGRES_DB` | ローカルDBの認証情報                   | `.env.example`のデフォルト値のままでよい       |
-| `DUMMY_USER_ID`（`api/.env`）                         | 認証未実装のため暫定的に使うユーザーID | `make seed`が表示するid                        |
+| `ENTRA_*`（`api/.env`）                               | APIがアクセストークンを検証するための値 | Entraのディスカバリ文書とAPIのアプリ登録       |
 | `AZURE_OPENAI_BASE_URL`（`api/.env`）                 | Azure OpenAIのエンドポイント           | Azure AI Foundryポータル                       |
 | `AZURE_OPENAI_API_KEY`（`api/.env`）                  | Azure OpenAIのAPIキー                  | Azure AI Foundryポータル                       |
 | `AZURE_OPENAI_CHAT_DEPLOYMENT`（`api/.env`）          | チャットモデルのデプロイ名             | Azure AI Foundryポータル                       |
 | `TAVILY_API_KEY`（`api/.env`）                        | Web検索用のTavily APIキー              | [Tavily](https://tavily.com/)                  |
 | `API_URL_INTERNAL`（`frontend/.env.local`）           | フロントエンドからAPIへの接続先URL     | `.env.local.example`のデフォルト値のままでよい |
+| `AUTH_*`（`frontend/.env.local`）                     | ログイン（Auth.js）の設定              | Entraのディスカバリ文書とWebのアプリ登録       |
 
 ## よく使うコマンド
 

@@ -1,5 +1,4 @@
 import logging
-import uuid
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, Request
@@ -8,6 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 import models
 from database import get_db
+from deps import OwnedTheme
 from job_queue import enqueue_research
 from rate_limit import limiter
 from schemas import ReportOut, ResearchJob
@@ -18,15 +18,10 @@ logger = logging.getLogger(__name__)
 
 
 @router.get("/themes/{theme_id}/reports", response_model=list[ReportOut])
-async def list_reports(
-    theme_id: uuid.UUID, db: Annotated[AsyncSession, Depends(get_db)]
-):
-    theme = await db.get(models.Theme, theme_id)
-    if theme is None:
-        raise HTTPException(status_code=404, detail="Theme not found")
+async def list_reports(theme: OwnedTheme, db: Annotated[AsyncSession, Depends(get_db)]):
     stmt = (
         select(models.Report)
-        .where(models.Report.theme_id == theme_id)
+        .where(models.Report.theme_id == theme.id)
         .order_by(models.Report.created_at.desc())
     )
     return (await db.scalars(stmt)).all()
@@ -36,13 +31,9 @@ async def list_reports(
 @limiter.limit("3/minute")  # 連打対策
 async def execute_research(
     request: Request,  # slowapi参照用に必要
-    theme_id: uuid.UUID,
+    theme: OwnedTheme,
     db: Annotated[AsyncSession, Depends(get_db)],
 ):
-    theme = await db.get(models.Theme, theme_id)
-    if theme is None:
-        raise HTTPException(status_code=404, detail="Theme not found")
-
     report = models.Report(
         theme_id=theme.id,
         content_md="",

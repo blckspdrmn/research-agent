@@ -115,8 +115,7 @@ export async function runResearch(
     if (e instanceof ApiError && e.status === 429) {
       return {
         status: "error",
-        message:
-          "リサーチの実行が集中しています。1分ほど待って再実行してください",
+        message: "リサーチの実行は1分あたり3回までです。",
       };
     }
     throw e;

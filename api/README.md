@@ -27,11 +27,13 @@ cp .env.example .env
 
 | 変数 | 内容 |
 |---|---|
-| `DUMMY_USER_ID` | 認証実装までの暫定値。[初期データ](#初期データ)で採番された UUID を設定する |
+| `ENTRA_ISSUER` / `ENTRA_JWKS_URL` | アクセストークンの発行者と、署名検証用の公開鍵の取得先。Entraのディスカバリ文書の `issuer` / `jwks_uri` |
+| `ENTRA_API_CLIENT_ID` | APIのアプリ登録のclient ID。トークンの宛先(`aud`)の検証に使う |
+| `ENTRA_REQUIRED_SCOPE` | 必須とするscope(`access_as_user`) |
 
 - `.env` は Git 管理外 (`.gitignore`)。認証情報を含むためコミットしないこと
 - 設定の読み込みは `config.py` の `Settings` (pydantic-settings) が担当する
-- `DUMMY_USER_ID` は UUID として検証される。形式が不正な場合はコンテナ起動時にエラーで停止する
+- 必須の値が未設定の場合は、コンテナ起動時にエラーで停止する
 
 ## データベース (PostgreSQL)
 
@@ -69,26 +71,6 @@ make migrate
 | `docker compose exec api alembic downgrade -1` | 1つ前に戻す |
 
 - `--autogenerate` (`make revision`) で生成したファイルは、**適用する前に必ず内容を確認する**こと。特にテーブル名・列名の変更(リネーム)は検出できず、「削除 + 追加」と解釈されてデータが失われる
-
-## 初期データ
-
-認証が未実装のため、テーマの所有者となるユーザーを1件手動で投入する。**ID は DB 側が採番する**ので、`RETURNING` で受け取って `.env` に設定する。
-
-```bash
-# リポジトリルートで
-make seed
-```
-
-表示された `id` を `api/.env` の `DUMMY_USER_ID` に設定し、反映させる。
-
-```bash
-# リポジトリルートで
-make restart-api
-```
-
-> **注意**: この手順は認証を実装するまでの暫定措置。実装時に `DUMMY_USER_ID` と本セクションは削除する。
->
-> **⚠️ Docker Compose環境でDBを作り直したとき(`docker compose down -v`など)は、この手順をやり直すこと。** 新しいDBでは`DUMMY_USER_ID`が指すユーザーが存在しなくなり、`POST /themes`等が`ForeignKeyViolation`で500エラーになる。
 
 ## ストレージ (Azurite)
 
