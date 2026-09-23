@@ -25,7 +25,7 @@ export async function authenticatedFetch(
   const headers = new Headers(init.headers);
   headers.set("Authorization", `Bearer ${accessToken}`);
   const res = await fetch(`${getApiUrl()}${path}`, { ...init, headers });
-  if (res.status === 401) redirect("/api/auth/signin");
+  if (res.status === 401) redirect("/login");
   if (!res.ok) throw new ApiError(res.status);
   return res;
 }

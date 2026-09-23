@@ -11,7 +11,7 @@ export async function requireApiAccessToken(): Promise<string> {
     // APIリクエストを投げる時間を鑑みて期限まで30秒を切っている場合にはsigninへ
     session.expiresAt <= Date.now() / 1000 + 30
   ) {
-    redirect("/api/auth/signin");
+    redirect("/login");
   }
   return session.accessToken;
 }
