@@ -7,7 +7,8 @@ erDiagram
 
     users {
         uuid id PK "NOT NULL、DB側が uuidv7 で採番"
-        varchar email UK "NOT NULL、最大255文字"
+        varchar entra_issuer UK "NULL可、最大255文字、アクセストークンのiss（発行元テナント）"
+        varchar entra_sub UK "NULL可、最大255文字、アクセストークンのsub"
         timestamptz created_at "NOT NULL、DB側で自動設定"
     }
 
@@ -29,6 +30,13 @@ erDiagram
         int total_input_tokens "NULL可、LLM入力トークン合計"
         int total_output_tokens "NULL可、LLM出力トークン合計"
         int llm_call_count "NULL可、LLM呼び出し回数"
+        int attempt_count "NOT NULL、既定0、実行開始回数（上限3）"
+        timestamptz lease_until "NULL可、worker処理権の有効期限。完了時にNULLへ戻す"
         timestamptz created_at "NOT NULL、DB側で自動設定"
     }
 ```
+
+## 補足
+
+- `users` は `(entra_issuer, entra_sub)` の組で一意（`uq_users_entra_identity`）。Microsoft Entra External ID で初めてAPIにアクセスしたときに作成される。メールアドレスは保存しない
+- `reports.attempt_count` と `lease_until` は、Queue の重複配送やworkerの停止に備えた処理権の管理に使う。条件付きUPDATEで処理権を取り、保存時は取得時の `attempt_count` と一致する場合だけ書き込む
