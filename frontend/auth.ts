@@ -17,14 +17,20 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
+    // https://authjs.dev/guides/integrating-third-party-backends#storing-the-token-in-the-session
     // https://authjs.dev/reference/nextjs#jwt
     jwt({ token, account }) {
       if (account) {
-        // https://authjs.dev/guides/integrating-third-party-backends#storing-the-token-in-the-session
-        token.apiAccessToken = account.access_token;
-        token.apiExpiresAt = account.expires_at;
+        token.accessToken = account.access_token;
+        token.expiresAt = account.expires_at;
       }
       return token;
+    },
+    // https://authjs.dev/reference/nextjs#session
+    session({ session, token }) {
+      session.accessToken = token.accessToken;
+      session.expiresAt = token.expiresAt;
+      return session;
     },
   },
 });
