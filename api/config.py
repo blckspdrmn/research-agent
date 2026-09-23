@@ -1,5 +1,3 @@
-import uuid
-
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -11,7 +9,11 @@ class Settings(BaseSettings):
     azure_openai_chat_deployment: str
     # Queue接続用。ローカルはAzurite、本番はStorage Accountの接続文字列
     azure_storage_connection_string: str
-    dummy_user_id: uuid.UUID  # TODO: のちほど認証を入れたら削除する
+    # アクセストークンの検証に使う値。いずれもdiscoveryと、APIのアプリ登録から取る
+    entra_issuer: str
+    entra_jwks_url: str
+    entra_api_client_id: str
+    entra_required_scope: str
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
 

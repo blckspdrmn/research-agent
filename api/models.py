@@ -2,7 +2,17 @@ import enum
 import uuid
 from datetime import datetime
 
-from sqlalchemy import DateTime, Enum, ForeignKey, String, Text, Uuid, func, text
+from sqlalchemy import (
+    DateTime,
+    Enum,
+    ForeignKey,
+    String,
+    Text,
+    UniqueConstraint,
+    Uuid,
+    func,
+    text,
+)
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
@@ -21,11 +31,16 @@ class ReportStatus(enum.StrEnum):
 
 class User(Base):
     __tablename__ = "users"
+    __table_args__ = (
+        UniqueConstraint("entra_issuer", "entra_sub", name="uq_users_entra_identity"),
+    )  # 組の重複を許さない
 
     id: Mapped[uuid.UUID] = mapped_column(
         Uuid, primary_key=True, server_default=text("uuidv7()")
     )
-    email: Mapped[str] = mapped_column(String(255), unique=True)
+    # 検証済みアクセストークンの①iss（テナント）②sub（このアプリから見たユーザーid）
+    entra_issuer: Mapped[str | None] = mapped_column(String(255), default=None)
+    entra_sub: Mapped[str | None] = mapped_column(String(255), default=None)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )

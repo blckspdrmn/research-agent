@@ -3,10 +3,10 @@ import pytest
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
 import models
+from auth import get_current_user
 from config import settings
 from database import get_db
 from main import app
-from routers.themes import DUMMY_USER_ID
 
 TEST_DB_URL = settings.test_database_url
 
@@ -28,13 +28,17 @@ async def db():
         await conn.run_sync(models.Base.metadata.create_all)
 
     async with async_sessionmaker(engine, expire_on_commit=False)() as session:
-        # themes.user_id が参照するダミーユーザーを用意する
-        session.add(models.User(id=DUMMY_USER_ID, email="test@example.com"))
+        # 所有チェックのテスト用。JWTの検証自体はここでは扱わない
+        user = models.User(entra_issuer="https://test.example", entra_sub="test-user")
+        session.add(user)
         await session.commit()
 
         app.dependency_overrides[get_db] = lambda: session
-        yield session
-        app.dependency_overrides.clear()
+        app.dependency_overrides[get_current_user] = lambda: user
+        try:
+            yield session
+        finally:
+            app.dependency_overrides.clear()
 
     await engine.dispose()
 
