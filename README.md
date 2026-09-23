@@ -1,57 +1,59 @@
-# research-agent
+# Research Agent
 
-テーマを登録すると、AIエージェントが定期的にWebリサーチしてレポートを作るアプリ。
+調べたいテーマを登録すると、AIエージェントがWeb検索を行い、Markdown形式の調査レポートを作成するアプリです。リサーチは非同期で実行され、過去のレポートもテーマごとに確認できます。
 
-学習目的のため、Claude Codeに知らない概念等を質問しつつ実装を試みる。
+## 主な機能
 
-## 構成
+- Microsoft Entra External IDによるログイン
+- テーマの登録・編集・削除
+- AIエージェントによるWebリサーチとレポート生成
+- テーマごとのレポート履歴と実行状況の表示
+- ユーザー単位のデータ分離とリサーチ実行制限（暫定：1ユーザー1分あたり3回）
 
-| ディレクトリ | 中身                             |
-| ------------ | -------------------------------- |
-| `frontend/`  | Next.js (App Router) + shadcn/ui |
-| `api/`       | FastAPI + SQLAlchemy + LangChain |
-| `docs/`      | ADR（設計判断の記録）            |
+## アーキテクチャ
 
-## 必要なもの
+![Research Agentのアーキテクチャ](docs/architecture.svg)
 
-Docker Desktop / Node.js 24 / Python 3.12+ / uv / make（Macは標準）
+- ブラウザからの操作はNext.jsが受け、Server Components / Server Actionsから内部APIを呼び出し。
+- FastAPIはアクセストークンとデータ所有者を検証し、リサーチ依頼をAzure Storage Queueへ登録。
+- QueueをトリガーにContainer Apps Jobが起動し、LangGraph、Microsoft Foundry、Tavilyでレポートを生成。
+- PostgreSQLに保存された結果をNext.jsが再取得して表示。
 
-## セットアップ
+## 技術スタック
+
+| 領域 | 主な技術 |
+| --- | --- |
+| frontend | Next.js 16、React 19、TypeScript、Tailwind CSS 4、shadcn/ui |
+| 認証 | Auth.js v5、Microsoft Entra External ID |
+| api | FastAPI、Python 3.12、SQLAlchemy 2（async）、Pydantic、Alembic、PostgreSQL |
+| AI | LangGraph、LangChain、Microsoft Foundry（Azure OpenAI）、Tavily |
+| インフラ | Azure Container Apps / Jobs、Storage Queue、Azure Container Registry、Managed Identity、Log Analytics、Bicep |
+| CI/CD | GitHub、Azure Pipelines、Docker |
+
+## リポジトリ構成
+
+| パス | 内容 |
+| --- | --- |
+| `frontend/` | Next.jsフロントエンド |
+| `api/` | FastAPI、worker、DBマイグレーション |
+| `infra/` | AzureリソースのBicep定義  ※一部のみ。後日アップデート |
+| `docs/` | アーキテクチャ図、ADR、ER図 |
+
+## ローカルで動かす手順
 
 ```bash
-cp .env.example .env           # DBの認証情報（デフォルト値のままでよい）
+cp .env.example .env
 cp api/.env.example api/.env
-cp frontend/.env.local.example frontend/.env.local # ログイン用の設定を記入する
-make up                        # 全コンテナ起動
-make migrate                   # DBスキーマ適用
+cp frontend/.env.local.example frontend/.env.local
+# api/.env と frontend/.env.local に必要な値を設定
+make up
+make migrate
 ```
 
-ログインにはMicrosoft Entra External IDを使う。事前にアプリ登録を行い、`api/.env`の`ENTRA_*`と`frontend/.env.local`の`AUTH_*`を設定しておく。ユーザーは初回ログイン時に自動で作成される。
-
-- フロント: http://localhost:3001
-- API（Swagger UI）: http://localhost:8000/docs
-
-## 環境変数
-
-| 変数                                                  | 用途                                   | 取得元                                         |
-| ----------------------------------------------------- | -------------------------------------- | ---------------------------------------------- |
-| `POSTGRES_USER` / `POSTGRES_PASSWORD` / `POSTGRES_DB` | ローカルDBの認証情報                   | `.env.example`のデフォルト値のままでよい       |
-| `ENTRA_*`（`api/.env`）                               | APIがアクセストークンを検証するための値 | Entraのディスカバリ文書とAPIのアプリ登録       |
-| `AZURE_OPENAI_BASE_URL`（`api/.env`）                 | Azure OpenAIのエンドポイント           | Azure AI Foundryポータル                       |
-| `AZURE_OPENAI_API_KEY`（`api/.env`）                  | Azure OpenAIのAPIキー                  | Azure AI Foundryポータル                       |
-| `AZURE_OPENAI_CHAT_DEPLOYMENT`（`api/.env`）          | チャットモデルのデプロイ名             | Azure AI Foundryポータル                       |
-| `TAVILY_API_KEY`（`api/.env`）                        | Web検索用のTavily APIキー              | [Tavily](https://tavily.com/)                  |
-| `API_URL_INTERNAL`（`frontend/.env.local`）           | フロントエンドからAPIへの接続先URL     | `.env.local.example`のデフォルト値のままでよい |
-| `AUTH_*`（`frontend/.env.local`）                     | ログイン（Auth.js）の設定              | Entraのディスカバリ文書とWebのアプリ登録       |
-
-## よく使うコマンド
-
-`make help` を実行（全コマンドの一覧が出る）
-
-## CI
-
-PRを出すとAzure DevOps上でlint / test / buildが自動実行される。CIが通らないとマージできない。
+フロントエンドは <http://localhost:3001>、Swagger UIは <http://localhost:8000/docs> で確認できます。詳しい準備と開発手順は[CONTRIBUTING.md](CONTRIBUTING.md)を参照してください。
 
 ## ドキュメント
 
-- 設計判断の履歴: `docs/adr/`
+- [開発者向けガイド](CONTRIBUTING.md)
+- [設計判断の記録](docs/adr/) ※ 一部のみ。後日アップデート。
+- [ER図](docs/er-diagram.md)
