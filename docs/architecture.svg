@@ -75,7 +75,7 @@
   <text x="1386" y="143" class="lane-title" fill="#c2410c">開発と CI/CD</text>
 
   <!-- Container Apps Environment -->
-  <rect x="344" y="160" width="754" height="595" rx="16" fill="#fbfdff" stroke="#5794d0" stroke-width="2" stroke-dasharray="8 5"/>
+  <path d="M360 160H1082Q1098 160 1098 176V451Q1098 467 1082 467H596Q580 467 580 483V739Q580 755 564 755H360Q344 755 344 739V176Q344 160 360 160Z" fill="#fbfdff" stroke="#5794d0" stroke-width="2" stroke-dasharray="8 5"/>
   <use href="#az-env" x="362" y="171" width="28" height="28"/>
   <text x="400" y="190" class="section-title">Container Apps Environment</text>
   <text x="868" y="190" class="tiny">アプリとジョブの実行基盤</text>
@@ -85,16 +85,16 @@
   <path d="M284 492H320V405H364" class="auth-flow"/>
   <path d="M564 280H594" class="main-flow"/>
   <path d="M594 405H564" class="return-flow"/>
-  <path d="M704 455V485" class="main-flow"/>
-  <path d="M1025 485V455" class="main-flow"/>
+  <path d="M704 455V497" class="main-flow"/>
+  <path d="M1025 497V455" class="main-flow"/>
   <path d="M1078 285H1115" class="main-flow"/>
   <path d="M1078 405H1095V447H1115" class="main-flow"/>
-  <path d="M1062 455V470H1087V610H1040V625" class="main-flow"/>
-  <path d="M610 455V470H584V610H620V625" class="main-flow"/>
+  <path d="M1062 455V482H1087V610H1040V625" class="main-flow"/>
+  <path d="M610 455V482H590V610H624V625" class="main-flow"/>
 
   <!-- Exactly three external CI/CD routes -->
   <path d="M1362 870H340V817H364" class="ci-flow"/>
-  <path d="M1362 765H584V685H574" class="ci-flow"/>
+  <path d="M1362 765H590V685H574" class="ci-flow"/>
   <path d="M1362 160H1098" class="ci-flow"/>
   <path d="M469 785V755" class="pull-flow"/>
 
@@ -161,10 +161,7 @@
     </g>
     <text x="14" y="106" class="small">FastAPI / Python 3.12</text>
     <text x="14" y="125" class="tiny">SQLAlchemy 2 async / Pydantic</text>
-    <rect x="14" y="136" width="68" height="25" rx="13" class="badge"/>
-    <text x="48" y="153" text-anchor="middle" class="tiny">Alembic</text>
-    <rect x="90" y="136" width="60" height="25" rx="13" class="badge"/>
-    <text x="120" y="153" text-anchor="middle" class="tiny">slowapi</text>
+    <text x="14" y="148" class="tiny">Alembic / slowapi</text>
     <rect x="12" y="168" width="196" height="60" rx="8" class="callout"/>
     <text x="22" y="184" class="tiny">PyJWTでトークン検証</text>
     <text x="22" y="201" class="tiny">署名 / aud / iss / exp / scp</text>
@@ -195,7 +192,7 @@
   <!-- Secrets -->
   <g transform="translate(364 485)">
     <rect width="210" height="115" rx="12" class="callout"/>
-    <text x="14" y="25" class="section-title">Container Apps secrets</text>
+    <text x="14" y="25" class="section-title" style="font-size:14px">Container Apps secrets</text>
     <text x="14" y="49" class="tiny">DB接続・LLM/Tavilyキー</text>
     <text x="14" y="68" class="tiny">Storage接続・Auth.js secret</text>
     <text x="14" y="88" class="tiny">secretに保存し、環境変数から</text>
@@ -203,14 +200,14 @@
   </g>
 
   <!-- Queue -->
-  <g transform="translate(594 485)">
-    <rect width="484" height="115" rx="12" class="card"/>
-    <use href="#az-storage" x="16" y="15" width="34" height="34"/>
-    <use href="#az-queue" x="58" y="15" width="34" height="34"/>
-    <text x="106" y="37" class="card-title">Azure Storage Queue</text>
-    <text x="16" y="70" class="body">research-jobs / research-jobs-poison</text>
-    <text x="16" y="94" class="small">pending を投入・完了後に削除</text>
-    <text x="258" y="94" class="tiny">Blob reports: 作成済み・現在未使用</text>
+  <g transform="translate(604 497)">
+    <rect width="474" height="103" rx="12" class="card"/>
+    <use href="#az-storage" x="16" y="12" width="34" height="34"/>
+    <use href="#az-queue" x="58" y="12" width="34" height="34"/>
+    <text x="106" y="34" class="card-title">Azure Storage Queue</text>
+    <text x="16" y="64" class="body">research-jobs / research-jobs-poison</text>
+    <text x="16" y="87" class="small">pending を投入・完了後に削除</text>
+    <text x="248" y="87" class="tiny">Blob reports: 作成済み・現在未使用</text>
   </g>
 
   <!-- Migration job -->
@@ -224,8 +221,8 @@
   </g>
 
   <!-- PostgreSQL -->
-  <g transform="translate(594 625)">
-    <rect width="484" height="120" rx="12" class="card"/>
+  <g transform="translate(604 625)">
+    <rect width="474" height="120" rx="12" class="card"/>
     <use href="#az-postgres" x="16" y="16" width="38" height="38"/>
     <text x="68" y="39" class="card-title">Azure Database for PostgreSQL</text>
     <text x="16" y="76" class="body">users / themes / reports</text>
@@ -288,14 +285,14 @@
   <text x="1105" y="750" class="tiny" fill="#c2410c">Migrate → api-migrate</text>
   <text x="1260" y="150" class="tiny" fill="#c2410c">Deploy</text>
   <text x="485" y="776" class="tiny" fill="#0f8a64">Managed Identityでpull</text>
-  <text x="800" y="477" class="tiny">KEDAが件数を見て起動</text>
+  <text x="840" y="487" class="tiny">KEDAが件数を見て起動</text>
   <text x="1120" y="388" class="tiny">HTTPS</text>
-  <text x="535" y="615" class="tiny" fill="#1473e6">CRUD</text>
+  <text x="570" y="615" text-anchor="end" class="tiny" fill="#1473e6">CRUD</text>
 
   <circle cx="324" cy="238" r="13" class="num"/><text x="324" y="238" class="num-text">1</text>
   <circle cx="579" cy="260" r="13" class="num"/><text x="579" y="260" class="num-text">2</text>
-  <circle cx="730" cy="470" r="13" class="num"/><text x="730" y="470" class="num-text">3</text>
-  <circle cx="1050" cy="470" r="13" class="num"/><text x="1050" y="470" class="num-text">4</text>
+  <circle cx="728" cy="482" r="13" class="num"/><text x="728" y="482" class="num-text">3</text>
+  <circle cx="1001" cy="482" r="13" class="num"/><text x="1001" y="482" class="num-text">4</text>
   <circle cx="1097" cy="267" r="13" class="num"/><text x="1097" y="267" class="num-text">5</text>
   <circle cx="1000" cy="612.5" r="12" class="num"/><text x="1000" y="612.5" class="num-text">6</text>
   <circle cx="579" cy="425" r="13" class="num"/><text x="579" y="425" class="num-text">7</text>
@@ -317,7 +314,9 @@
 
   <!-- Pipeline branches -->
   <path d="M1569 325V350" class="ci-internal"/>
-  <path d="M1495 325V338H1378V500H1386" class="ci-internal"/>
+  <path d="M1752 290H1766V492H1754" class="ci-internal"/>
+  <text x="1580" y="343" class="tiny" fill="#c2410c">PR作成</text>
+  <text x="1758" y="343" text-anchor="end" class="tiny" fill="#c2410c">mainへのマージ</text>
 
   <!-- PR pipeline -->
   <g transform="translate(1386 350)">
