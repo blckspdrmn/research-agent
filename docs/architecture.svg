@@ -8,11 +8,11 @@
 <symbol id="az-mi" viewBox="0 0 18 18"><defs><linearGradient id="az-mi-bb67b154-af8f-4a53-a9ce-aa046b9398e9" x1="13.18" y1="13.01" x2="8.63" y2="4.38" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#1988d9" /><stop offset="0.9" stop-color="#54aef0" /></linearGradient><linearGradient id="az-mi-a47d7138-084a-471d-8d63-744e75b9e8a3" x1="11.22" y1="10.5" x2="14.37" y2="15.93" gradientUnits="userSpaceOnUse"><stop offset="0.1" stop-color="#54aef0" /><stop offset="0.29" stop-color="#4fabee" /><stop offset="0.51" stop-color="#41a2e9" /><stop offset="0.74" stop-color="#2a93e0" /><stop offset="0.88" stop-color="#1988d9" /></linearGradient></defs><g><polygon points="1.15 10.22 8.93 15.27 16.85 10.21 17.85 11.36 8.93 17.11 0.15 11.37 1.15 10.22" fill="#50e6ff" /><polygon points="1.73 9.58 8.93 1 16.28 9.59 8.93 14.23 1.73 9.58" fill="#fff" /><polygon points="8.93 1 8.93 14.23 1.73 9.58 8.93 1" fill="#50e6ff" /><polygon points="8.93 1 8.93 14.23 16.28 9.59 8.93 1" fill="url(#az-mi-bb67b154-af8f-4a53-a9ce-aa046b9398e9)" /><polygon points="8.93 7.83 16.28 9.59 8.93 14.23 8.93 7.83" fill="#53b1e0" /><polygon points="8.93 14.23 1.73 9.58 8.93 7.83 8.93 14.23" fill="#9cebff" /><polygon points="8.93 17.11 17.85 11.36 16.85 10.21 8.93 15.27 8.93 17.11" fill="url(#az-mi-a47d7138-084a-471d-8d63-744e75b9e8a3)" /><g><path id="az-mi-e189a61f-631a-4122-bb2b-079e86004d96" d="M16.32,11.88a1.16,1.16,0,0,0,0-1.65h0l-2-2a1.16,1.16,0,0,0-1.64,0h0l-2,2a1.18,1.18,0,0,0,0,1.65l1.67,1.67a.32.32,0,0,1,.09.23v3.1a.36.36,0,0,0,.12.28l.76.76a.25.25,0,0,0,.37,0l.73-.73h0l.44-.44a.15.15,0,0,0,0-.21l-.31-.31a.16.16,0,0,1,0-.24l.31-.31a.16.16,0,0,0,0-.22l-.31-.31a.15.15,0,0,1,0-.23l.31-.32a.15.15,0,0,0,0-.21l-.44-.44v-.16ZM13.5,8.71a.66.66,0,1,1-.66.66.66.66,0,0,1,.66-.66Z" fill="#ffca00" /><path id="az-mi-fb7033ee-4650-4886-80c7-eddf62560f85" d="M13,17h0a.14.14,0,0,0,.24-.11V14.33a.16.16,0,0,0-.06-.13h0a.14.14,0,0,0-.22.13v2.51A.15.15,0,0,0,13,17Z" fill="#ff9300" opacity="0.75" /><rect id="az-mi-b166b8c2-b9ee-4c3d-bf7a-77bd5ce0570b" x="11.9" y="10.9" width="3.29" height="0.39" rx="0.18" fill="#ff9300" opacity="0.75" /><rect id="az-mi-baf437fe-3483-4a25-94ba-1e84a64cd2eb" x="11.9" y="11.53" width="3.29" height="0.39" rx="0.18" fill="#ff9300" opacity="0.75" /></g></g></symbol>
 <symbol id="az-queue" viewBox="0 0 18 18"><defs><linearGradient id="az-queue-f6607f9a-6e3a-4339-acc9-d6f3ae1a2c0d" x1="9" y1="15.799" x2="9" y2="5.316" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#a67af4" /><stop offset="0.775" stop-color="#b796f9" /></linearGradient></defs><g id="az-queue-f3784f80-3379-4e66-8e32-fca3fab0f4d7"><g><path d="M.544,5.316H17.456a0,0,0,0,1,0,0v9.918a.565.565,0,0,1-.565.565H1.109a.565.565,0,0,1-.565-.565V5.316A0,0,0,0,1,.544,5.316Z" fill="url(#az-queue-f6607f9a-6e3a-4339-acc9-d6f3ae1a2c0d)" /><path d="M1.112,2.2H16.888a.565.565,0,0,1,.565.565v2.55a0,0,0,0,1,0,0H.547a0,0,0,0,1,0,0V2.766A.565.565,0,0,1,1.112,2.2Z" fill="#773adc" /><g><rect x="2.625" y="6.435" width="3.683" height="7.933" rx="0.274" fill="#fff" /><rect x="7.158" y="6.435" width="3.683" height="7.933" rx="0.274" fill="#fff" opacity="0.75" /><rect x="11.692" y="6.435" width="3.683" height="7.933" rx="0.274" fill="#fff" opacity="0.5" /></g></g></g></symbol>
 <symbol id="az-storage" viewBox="0 0 18 18"><defs><linearGradient id="az-storage-ad4c4f96-09aa-4f91-ba10-5cb8ad530f74" x1="9" y1="15.83" x2="9" y2="5.79" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#b3b3b3" /><stop offset="0.26" stop-color="#c1c1c1" /><stop offset="1" stop-color="#e6e6e6" /></linearGradient></defs><path d="M.5,5.79h17a0,0,0,0,1,0,0v9.48a.57.57,0,0,1-.57.57H1.07a.57.57,0,0,1-.57-.57V5.79A0,0,0,0,1,.5,5.79Z" fill="url(#az-storage-ad4c4f96-09aa-4f91-ba10-5cb8ad530f74)" /><path d="M1.07,2.17H16.93a.57.57,0,0,1,.57.57V5.79a0,0,0,0,1,0,0H.5a0,0,0,0,1,0,0V2.73A.57.57,0,0,1,1.07,2.17Z" fill="#37c2b1" /><path d="M2.81,6.89H15.18a.27.27,0,0,1,.26.27v1.4a.27.27,0,0,1-.26.27H2.81a.27.27,0,0,1-.26-.27V7.16A.27.27,0,0,1,2.81,6.89Z" fill="#fff" /><path d="M2.82,9.68H15.19a.27.27,0,0,1,.26.27v1.41a.27.27,0,0,1-.26.27H2.82a.27.27,0,0,1-.26-.27V10A.27.27,0,0,1,2.82,9.68Z" fill="#37c2b1" /><path d="M2.82,12.5H15.19a.27.27,0,0,1,.26.27v1.41a.27.27,0,0,1-.26.27H2.82a.27.27,0,0,1-.26-.27V12.77A.27.27,0,0,1,2.82,12.5Z" fill="#258277" /></symbol>
+<symbol id="az-blob" viewBox="0 0 18 18"><defs><linearGradient id="az-blob-a9c62307-1cd0-400c-911b-17ec6a9110ce" x1="9" y1="15.834" x2="9" y2="5.788" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#32bedd" /><stop offset="0.775" stop-color="#32d4f5" /></linearGradient></defs><g id="az-blob-f31d214e-f09e-49e3-b3d2-7c5d55682d09"><g><path d="M.5,5.788h17a0,0,0,0,1,0,0v9.478a.568.568,0,0,1-.568.568H1.068A.568.568,0,0,1,.5,15.266V5.788A0,0,0,0,1,.5,5.788Z" fill="url(#az-blob-a9c62307-1cd0-400c-911b-17ec6a9110ce)" /><path d="M1.071,2.166H16.929a.568.568,0,0,1,.568.568V5.788a0,0,0,0,1,0,0H.5a0,0,0,0,1,0,0V2.734A.568.568,0,0,1,1.071,2.166Z" fill="#0078d4" /><rect x="2.328" y="7.049" width="6.281" height="3.408" rx="0.283" fill="#0078d4" /><rect x="9.336" y="7.049" width="6.281" height="3.408" rx="0.283" fill="#fff" /><rect x="2.296" y="11.128" width="6.281" height="3.408" rx="0.283" fill="#0078d4" /><rect x="9.304" y="11.128" width="6.281" height="3.408" rx="0.283" fill="#0078d4" /></g></g></symbol>
 <symbol id="az-postgres" viewBox="0 0 18 18"><defs><linearGradient id="az-postgres-a28dee20-4c71-46b5-b957-804c67da725a" x1="2.44" y1="10.67" x2="15.27" y2="10.67" gradientTransform="translate(0.14 -0.5) rotate(-0.01)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#005ba1" /><stop offset="0.07" stop-color="#0060a9" /><stop offset="0.36" stop-color="#0071c8" /><stop offset="0.52" stop-color="#0078d4" /><stop offset="0.64" stop-color="#0074cd" /><stop offset="0.82" stop-color="#006abb" /><stop offset="1" stop-color="#005ba1" /></linearGradient></defs><path d="M9,5.14c-3.54,0-6.41-1-6.41-2.32V15.18c0,1.27,2.82,2.3,6.32,2.32H9c3.54,0,6.41-1,6.41-2.32V2.82C15.41,4.1,12.54,5.14,9,5.14Z" fill="url(#az-postgres-a28dee20-4c71-46b5-b957-804c67da725a)" /><path d="M15.41,2.82c0,1.28-2.87,2.32-6.41,2.32s-6.41-1-6.41-2.32S5.46.5,9,.5s6.41,1,6.41,2.32" fill="#e8e8e8" /><path d="M13.91,2.63c0,.82-2.2,1.48-4.91,1.48S4.08,3.45,4.08,2.64,6.28,1.16,9,1.16s4.91.66,4.91,1.47" fill="#50e6ff" /><path d="M9,3a11.65,11.65,0,0,0-3.9.57A11.53,11.53,0,0,0,9,4.11a11.47,11.47,0,0,0,3.89-.58A11.93,11.93,0,0,0,9,3Z" fill="#198ab3" /><path d="M12,9c0,.08,0,.24,0,.42a5.12,5.12,0,0,0-.08.63c0,.12,0,.3.05.46s0,.27,0,.36a1.68,1.68,0,0,1-.25.86.43.43,0,0,0,0,.07l.1.12a10.55,10.55,0,0,0,1.06-2.38h0c.28-.95.31-1.63.09-1.92a2.58,2.58,0,0,0-2.68-.86,3.29,3.29,0,0,1,.91.67A2.28,2.28,0,0,1,12,9Zm-.31.08a1.15,1.15,0,0,0-.79.09c-.29.18-.2.55,0,1a7.77,7.77,0,0,0,.35.85l.09.16h0c.05.08.08.15.11.2l.08.13a1.28,1.28,0,0,0,.18-.65,2.86,2.86,0,0,0,0-.33c0-.17,0-.36-.05-.49a6.1,6.1,0,0,1,.08-.69C11.71,9.24,11.72,9.13,11.73,9.05Zm-.3.41a.4.4,0,0,1-.18.1h0a.33.33,0,0,1-.14,0A.23.23,0,0,1,11,9.4h0c0-.07.11-.13.24-.15h.19s.09,0,.09.08A.2.2,0,0,1,11.43,9.46Zm-4.69.89c0-.07,0-.13,0-.17a1,1,0,0,0,0-.17,5.55,5.55,0,0,1,0-1A5.22,5.22,0,0,1,7,7.94,2.41,2.41,0,0,1,7.58,7,4.78,4.78,0,0,0,6.23,6.8a1.87,1.87,0,0,0-1.1.3A2,2,0,0,0,4.5,8.92,12.27,12.27,0,0,0,5,11.16c.34,1.14.73,1.84,1.07,1.95h0c.15.05.31,0,.47-.21.28-.34.54-.63.69-.8A1.88,1.88,0,0,1,6.74,10.35Zm.26.4a2.18,2.18,0,0,0,.06.56,1.5,1.5,0,0,0,.26.44,1.07,1.07,0,0,0,.35.25,1.09,1.09,0,0,0,.39.08c0-.17.14-.38.23-.6a4.35,4.35,0,0,0,.21-.59,6.61,6.61,0,0,0,0-1.11c0-.09,0-.19-.06-.3a.45.45,0,0,0-.12-.27l0,0A.66.66,0,0,0,8,9.08H7.8a1.56,1.56,0,0,0-.48.14A2,2,0,0,0,7,9.41v.11c0,.2,0,.41,0,.61v0a.86.86,0,0,1,0,.15l0,.39H7Zm.66-1.34,0,0a.46.46,0,0,1,.28,0,.6.6,0,0,1,.19.06c.09,0,.1.11.09.14h0a.37.37,0,0,1-.12.13A.3.3,0,0,1,8,9.73h0a.34.34,0,0,1-.28-.28Zm.74,3a.23.23,0,0,0-.13.06l-.14.17c-.17.21-.24.28-.73.38a.52.52,0,0,0-.26.1.58.58,0,0,0,.24.11,1.18,1.18,0,0,0,.72,0A1.7,1.7,0,0,0,8.45,13a.61.61,0,0,0,.2-.31.36.36,0,0,0-.1-.28A.15.15,0,0,0,8.4,12.39Zm4.61,0a1.63,1.63,0,0,1-1.13,0,.22.22,0,0,0-.14,0,.3.3,0,0,0-.17.14,1.09,1.09,0,0,0,0,.31,1.8,1.8,0,0,0,1.1-.1,1.36,1.36,0,0,0,.48-.34Zm-2.4-2.14c-.14-.41-.34-1,.18-1.36a1.35,1.35,0,0,1,.89-.15A3.18,3.18,0,0,0,11,7.64l-.1-.1-.06-.06h0a.34.34,0,0,0-.06-.06l0,0,0,0A2.34,2.34,0,0,0,10.11,7,2.63,2.63,0,0,0,9,6.78a1.52,1.52,0,0,0-.7.11A1.77,1.77,0,0,0,8,7a2.1,2.1,0,0,0-.74,1,5.84,5.84,0,0,0-.21,1,1.66,1.66,0,0,1,1-.23.84.84,0,0,1,.77.91,7.26,7.26,0,0,1,0,1.27,3.87,3.87,0,0,1-.23.63c-.06.17-.14.35-.18.49a.5.5,0,0,1,.38.14.66.66,0,0,1,.19.53H9c0,.08,0,.16,0,.24a6.55,6.55,0,0,0,.24,2.44.54.54,0,0,0,.24.21.6.6,0,0,0,.31.1,1.3,1.3,0,0,0,1-.34,1.05,1.05,0,0,0,.29-.66c.07-.45.22-1.7.24-2h0a.72.72,0,0,1,.09-.44.63.63,0,0,1,.27-.24A5.36,5.36,0,0,1,10.61,10.24Z" fill="#f2f2f2" /></symbol>
 <symbol id="az-log" viewBox="0 0 18 18"><defs><linearGradient id="az-log-a997e203-1d7d-4cb9-b131-5dc44e029b46" x1="5.23" y1="17.45" x2="5.23" y2="8.09" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#1988d9" /><stop offset="0.9" stop-color="#54aef0" /></linearGradient><linearGradient id="az-log-e122e9d8-aee5-4f1a-a60e-b1eae355daa5" x1="11.5" y1="12.45" x2="11.5" y2="0.55" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#198ab3" /><stop offset="0.01" stop-color="#198bb4" /><stop offset="0.44" stop-color="#27b2d7" /><stop offset="0.79" stop-color="#2fcbed" /><stop offset="1" stop-color="#32d4f5" /></linearGradient></defs><path d="M5.59,13.13H9.91v4.32H5.59ZM1.15,17.45H4.87V13.13H.55v3.72A.6.6,0,0,0,1.15,17.45Zm-.6-5H4.87V8.09H.55Z" fill="url(#az-log-a997e203-1d7d-4cb9-b131-5dc44e029b46)" /><path d="M11.5.55a5.89,5.89,0,0,1,5.95,6,5.89,5.89,0,0,1-5.95,5.95H5.55V6.5A5.89,5.89,0,0,1,11.5.55Z" fill-rule="evenodd" fill="url(#az-log-e122e9d8-aee5-4f1a-a60e-b1eae355daa5)" /><rect x="7.59" y="5.65" width="1.36" height="4.08" fill="#fff" /><rect x="10.31" y="7.01" width="1.36" height="2.72" fill="#fff" /><rect x="13.03" y="4.29" width="1.36" height="5.44" fill="#fff" /></symbol>
 <symbol id="az-foundry" viewBox="0 0 18 18"><defs><linearGradient id="az-foundry-uuid-5a7bd7fa-6937-44bd-a5ba-e23eddbb6d35" x1="10.91" y1="13.66" x2="13.62" y2="13.66" gradientTransform="translate(0 20) scale(1 -1)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#302ec9" /><stop offset=".12" stop-color="#151698" /><stop offset=".25" stop-color="#0a0b7e" /><stop offset=".43" stop-color="#090c7f" /><stop offset=".51" stop-color="#141698" /><stop offset=".61" stop-color="#282ac4" /><stop offset=".77" stop-color="#8e8ff4" /><stop offset=".85" stop-color="#a7a6f7" /><stop offset=".91" stop-color="#cacafb" /><stop offset="1" stop-color="#fff" /></linearGradient><linearGradient id="az-foundry-uuid-a9b2ac78-bff0-475d-89df-2c97f2122f93" x1="12.26" y1="8.32" x2="12.26" y2="18.23" gradientTransform="translate(0 20) scale(1 -1)" gradientUnits="userSpaceOnUse"><stop offset=".02" stop-color="#201ba6" /><stop offset=".64" stop-color="#2d29c7" /><stop offset="1" stop-color="#201ba6" /></linearGradient><linearGradient id="az-foundry-uuid-03b3b70c-1c8d-4b3f-9935-d9da2b20de2f" x1="14.19" y1="8.27" x2="14.19" y2="14.47" gradientTransform="translate(0 20) scale(1 -1)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3530c3" /><stop offset=".5" stop-color="#6d71d1" /><stop offset=".97" stop-color="#c0bff5" /><stop offset="1" stop-color="#e3e4ff" /></linearGradient><linearGradient id="az-foundry-uuid-cabc8ec9-3293-44b8-a33b-70823f583b30" x1="6.51" y1="3" x2="6.51" y2="19.15" gradientTransform="translate(0 20) scale(1 -1)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#302ec9" /><stop offset=".45" stop-color="#302ec9" /><stop offset=".95" stop-color="#cacafb" /><stop offset="1" stop-color="#7f7eaf" /></linearGradient></defs><path d="M11.96,11.68s.07-.1.07-.24v-3.87c0-.85.66-1.76,1.59-2.03-.06-.19-.64-2.11-.81-2.65-.17-.56-.67-1.9-1.29-1.9,0,0,0,0-.01,0h0s-.09.05-.13.13c-.32.58-.46,3.02-.46,4.84v2.26c.27.97.91,3.22.96,3.35,0,0,.05.1.09.1h0Z" fill="url(#az-foundry-uuid-5a7bd7fa-6937-44bd-a5ba-e23eddbb6d35)" /><path d="M11.96,11.68s.07-.1.07-.24v-3.87c0-.85.66-1.76,1.59-2.03-.06-.19-.64-2.11-.81-2.65-.17-.56-.67-1.9-1.29-1.9,0,0,0,0-.01,0h0s-.09.05-.13.13c-.32.58-.46,3.02-.46,4.84v2.26c.27.97.91,3.22.96,3.35,0,0,.05.1.09.1h0Z" fill="url(#az-foundry-uuid-a9b2ac78-bff0-475d-89df-2c97f2122f93)" /><path d="M16.01,5.46h-1.81c-1.21,0-2.17,1.09-2.17,2.11v3.87c0,.14-.04.24-.07.24s-.09-.1-.09-.1c0,0,.07.21.17.21h1.98c.62,0,2.48-.61,2.48-2.52v-3.25c0-.41-.24-.55-.49-.55Z" fill="url(#az-foundry-uuid-03b3b70c-1c8d-4b3f-9935-d9da2b20de2f)" /><path d="M2.34,17h5.38c2.35,0,3.2-2.03,3.2-3.81v-7.23c0-2.08.19-4.97.61-4.97h-3.23c-.77,0-1.43.82-2.18,2.48-.75,1.66-4.36,11.87-4.52,12.36-.26.79-.02,1.16.74,1.16Z" fill="url(#az-foundry-uuid-cabc8ec9-3293-44b8-a33b-70823f583b30)" /></symbol>
-<symbol id="az-openai" viewBox="0 0 18 18"><defs><radialGradient id="az-openai-uuid-2a7407aa-b787-48dd-a96a-0d81ab6e93bb" cx="-67.981" cy="793.199" r=".45" gradientTransform="translate(-17939.03 20368.029) rotate(45) scale(25.091 -34.149)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#83b9f9" /><stop offset="1" stop-color="#0078d4" /></radialGradient></defs><path d="m0,2.7v12.6c0,1.491,1.209,2.7,2.7,2.7h12.6c1.491,0,2.7-1.209,2.7-2.7V2.7c0-1.491-1.209-2.7-2.7-2.7H2.7C1.209,0,0,1.209,0,2.7ZM10.8,0v3.6c0,3.976,3.224,7.2,7.2,7.2h-3.6c-3.976,0-7.199,3.222-7.2,7.198v-3.598c0-3.976-3.224-7.2-7.2-7.2h3.6c3.976,0,7.2-3.224,7.2-7.2Z" fill="url(#az-openai-uuid-2a7407aa-b787-48dd-a96a-0d81ab6e93bb)" stroke-width="0" /></symbol>
-<symbol id="az-entra" viewBox="0 0 52.434 44.65"><defs><linearGradient id="az-entra-uuid-4341b8fa-1830-4a69-b366-e5af3eded21e" x1="35.748" y1="36.748" x2="35.748" y2="16.489" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#225086" /><stop offset="1" stop-color="#0055c5" /></linearGradient><linearGradient id="az-entra-uuid-1f2904ff-dfd7-45a0-a9a2-fa901698fa56" x1="35.848" y1="18.715" x2="35.848" y2="0" xlink:href="#az-entra-uuid-4341b8fa-1830-4a69-b366-e5af3eded21e" /><linearGradient id="az-entra-uuid-382247db-ae3e-44c4-8654-9aeb983b6f19" x1="14.586" y1="44.65" x2="14.586" y2="24.39" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0294e4" /><stop offset="1" stop-color="#6df" /></linearGradient><linearGradient id="az-entra-uuid-93c9aead-656a-41e2-9860-cd306c03ea8f" x1="16.781" y1="26.616" x2="16.781" y2="7.901" xlink:href="#az-entra-uuid-382247db-ae3e-44c4-8654-9aeb983b6f19" /></defs><g id="az-entra-uuid-e58917e4-56b1-4968-a05f-779155c8b16b" data-name="Layer 1"><g><g><path d="M22.752,36.543l5.759-5.773c.389-.39.906-.605,1.457-.605s1.064.213,1.453.601c.386.385.606.918.604,1.457v2.098h.049l12.12-.014v-2.095c-.003-1.134.918-2.059,2.052-2.063h.005c.55,0,1.066.214,1.454.602l4.406,4.401c.191-.383.31-.808.317-1.265,0-.031,0-.061,0-.092v-.363c-1.181-9.312-6.496-16.943-16.671-16.943s-15.671,6.45-16.671,16.989c-.184,1.62.98,3.083,2.601,3.267.011.001.023.003.034.004h.864c.055-.069.103-.141.166-.205Z" fill="url(#az-entra-uuid-4341b8fa-1830-4a69-b366-e5af3eded21e)" stroke-width="0" /><path d="M35.894,18.715c-1.792.008-3.546-.513-5.042-1.499l4.997,13.309,4.997-13.037c-1.499.873-3.218,1.299-4.951,1.226Z" fill="#fff" isolation="isolate" opacity=".8" stroke-width="0" /><circle cx="35.848" cy="9.357" r="9.357" fill="url(#az-entra-uuid-1f2904ff-dfd7-45a0-a9a2-fa901698fa56)" stroke-width="0" /></g><g><path d="M22.748,39.979c-.938-.946-.938-2.486.004-3.436l5.759-5.773c.193-.193.418-.343.662-.446-2.777-3.621-6.891-5.934-12.482-5.934C6.515,24.39,1.018,30.841.019,41.379c-.184,1.62.98,3.083,2.601,3.267.011.001.023.003.034.004h24.76l-4.665-4.671Z" fill="url(#az-entra-uuid-382247db-ae3e-44c4-8654-9aeb983b6f19)" stroke-width="0" /><path d="M16.826,26.616c-1.792.008-3.546-.513-5.042-1.499l4.997,13.309,4.997-13.037c-1.499.873-3.218,1.299-4.951,1.226Z" fill="#fff" isolation="isolate" opacity=".8" stroke-width="0" /><circle cx="16.781" cy="17.259" r="9.357" fill="url(#az-entra-uuid-93c9aead-656a-41e2-9860-cd306c03ea8f)" stroke-width="0" /></g><path d="M52.235,37.748l-5.766-5.759h0c-.058-.058-.137-.091-.219-.09-.17,0-.307.138-.307.308v3.54h0c0,.17-.138.307-.307.307l-13.561.016c-.013,0-.024.005-.036.007h-1.457c-.17,0-.307-.138-.307-.307v-3.547c0-.082-.032-.161-.09-.219-.12-.12-.315-.12-.435,0l-5.759,5.774c-.266.268-.266.7,0,.968l5.759,5.766h0c.06.065.144.1.232.098.17-.004.304-.144.301-.314v-3.557c0-.17.137-.307.307-.307h1.438c.016.003.031.01.048.01l13.561-.016h0c.17,0,.307.138.307.307v3.53c0,.082.032.161.09.218.12.12.315.12.435,0l5.766-5.766c.266-.268.266-.7,0-.968Z" fill="#6df" stroke-width="0" /></g></g></symbol>
+<symbol id="az-entra" viewBox="0 0 52.497 52.434"><defs><linearGradient id="az-entra-uuid-0e5943aa-6f75-467f-968c-6d6bab3f1b4a" x1="21.61" y1="32.173" x2="39.592" y2="11.158" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#225086" /><stop offset="1" stop-color="#0055c5" /></linearGradient><linearGradient id="az-entra-uuid-8b51c9e7-0fa1-4e86-b473-d0914dd2aab1" x1="17.85" y1="35.065" x2="17.85" y2="-10.83" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#6df" /><stop offset="1" stop-color="#0294e4" /></linearGradient><linearGradient id="az-entra-uuid-7b03c06b-2a8f-4001-a2e2-6d1ea451233d" x1="25.247" y1="41.303" x2="25.247" y2="-12.053" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#44dbf9" /><stop offset="1" stop-color="#cbf8ff" /></linearGradient><linearGradient id="az-entra-uuid-fbf77066-43a6-4bbb-8705-b9dec567af9a" x1="37.87" y1="41.745" x2="37.87" y2="-.538" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#041642" /><stop offset="1" stop-color="#041642" stop-opacity=".25" /></linearGradient><linearGradient id="az-entra-uuid-f18783c6-0630-4e3d-9292-105ae2b07e31" x1="43.035" y1="47.95" x2="43.035" y2="36.451" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#225086" /><stop offset="1" stop-color="#0055c5" /></linearGradient><linearGradient id="az-entra-uuid-fff95be8-5c45-4a48-a245-833c912b418f" x1="43.092" y1="37.715" x2="43.092" y2="27.093" xlink:href="#az-entra-uuid-f18783c6-0630-4e3d-9292-105ae2b07e31" /><linearGradient id="az-entra-uuid-83d9f6a7-60f2-4ba6-94c9-66e1e8042330" x1="31.034" y1="52.434" x2="31.034" y2="40.936" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0294e4" /><stop offset="1" stop-color="#6df" /></linearGradient><linearGradient id="az-entra-uuid-616bf102-a38a-42a9-bc41-78d8f57ec673" x1="32.279" y1="42.199" x2="32.279" y2="31.577" xlink:href="#az-entra-uuid-83d9f6a7-60f2-4ba6-94c9-66e1e8042330" /></defs><g id="az-entra-uuid-43ed42df-c2b0-4d61-a1fe-8f40371756a8" data-name="Layer 1"><g><g><path d="M23.216,44.685c.941-1.692,2.241-2.989,3.866-3.831-.858-1.124-1.339-2.512-1.339-3.966,0-3.606,2.932-6.54,6.535-6.54,1.641,0,3.143.609,4.292,1.612.228-3.4,3.066-6.097,6.521-6.097,2.995,0,5.52,2.029,6.289,4.784,1.395-1.453,1.514-3.732.119-5.318L28.462,1.432c-1.681-1.91-4.753-1.91-6.434,0L.991,25.33c-1.625,1.846-1.201,4.637.906,5.963l21.037,13.241c.091.057.188.101.282.15Z" fill="url(#az-entra-uuid-0e5943aa-6f75-467f-968c-6d6bab3f1b4a)" stroke-width="0" /><path d="M28.464,1.432c-1.681-1.91-4.753-1.91-6.434,0L.992,25.33c-1.625,1.846-1.201,4.637.906,5.963,0,0,7.786,4.901,8.768,5.519,1.088.685,2.899,1.445,4.81,1.445,1.741,0,3.359-.507,4.701-1.376.002-.001.004-.002.005-.003l5.062-3.186-12.241-7.707,12.551-14.258c1.544-1.771,3.863-2.899,6.458-2.899,1.324,0,2.571.301,3.685.824L28.464,1.432Z" fill="url(#az-entra-uuid-8b51c9e7-0fa1-4e86-b473-d0914dd2aab1)" stroke-width="0" /><path d="M25.247,33.691l2.746-1.728c.519-.453,1.107-.83,1.75-1.102l7.746-4.875h0,0s-12.243-13.908-12.243-13.908l-12.242,13.908.145.091,12.097,7.614h0Z" fill="url(#az-entra-uuid-7b03c06b-2a8f-4001-a2e2-6d1ea451233d)" stroke-width="0" /><path d="M27.082,40.855c-.858-1.124-1.339-2.512-1.339-3.966,0-3.606,2.932-6.54,6.535-6.54,1.641,0,3.143.609,4.292,1.612.228-3.4,3.066-6.097,6.521-6.097,2.996,0,5.522,2.031,6.29,4.787,1.397-1.453,1.518-3.734.121-5.32L28.466,1.432C27.625.477,26.437,0,25.248,0v42.123c.555-.495,1.166-.922,1.834-1.269Z" fill="url(#az-entra-uuid-fbf77066-43a6-4bbb-8705-b9dec567af9a)" fill-opacity=".5" opacity=".5" stroke-width="0" /></g><g><g><path d="M35.665,47.833l3.266-3.277c.22-.221.514-.343.826-.343s.603.121.824.341c.219.218.344.521.343.827v1.191h.028l6.873-.008v-1.189c-.002-.644.52-1.169,1.164-1.171h.003c.312,0,.605.122.825.342l2.499,2.498c.108-.217.176-.459.18-.718,0-.017,0-.035,0-.052v-.206c-.67-5.285-3.684-9.616-9.454-9.616s-8.887,3.661-9.454,9.642c-.104.92.556,1.75,1.475,1.854.006,0,.013.001.019.002h.49c.031-.039.058-.08.094-.117Z" fill="url(#az-entra-uuid-f18783c6-0630-4e3d-9292-105ae2b07e31)" stroke-width="0" /><path d="M43.118,37.715c-1.016.005-2.011-.291-2.859-.851l2.834,7.554,2.834-7.399c-.85.496-1.825.737-2.808.696Z" fill="#fff" isolation="isolate" opacity=".8" stroke-width="0" /><ellipse cx="43.092" cy="32.404" rx="5.306" ry="5.311" fill="url(#az-entra-uuid-fff95be8-5c45-4a48-a245-833c912b418f)" stroke-width="0" /></g><g><path d="M35.663,49.783c-.532-.537-.532-1.411.002-1.95l3.266-3.277c.109-.11.237-.195.375-.253-1.575-2.055-3.908-3.368-7.079-3.368-5.77,0-8.887,3.661-9.454,9.642-.104.92.556,1.75,1.475,1.854.006,0,.013.001.019.002h14.041l-2.646-2.651Z" fill="url(#az-entra-uuid-83d9f6a7-60f2-4ba6-94c9-66e1e8042330)" stroke-width="0" /><path d="M32.305,42.199c-1.016.005-2.011-.291-2.859-.851l2.834,7.554,2.834-7.399c-.85.496-1.825.737-2.808.696Z" fill="#fff" isolation="isolate" opacity=".8" stroke-width="0" /><ellipse cx="32.279" cy="36.888" rx="5.306" ry="5.311" fill="url(#az-entra-uuid-616bf102-a38a-42a9-bc41-78d8f57ec673)" stroke-width="0" /></g><path d="M52.384,48.517l-3.27-3.269h0c-.033-.033-.077-.051-.124-.051-.096,0-.174.079-.174.175v2.009h0c0,.096-.078.174-.174.174l-7.69.009c-.007,0-.014.003-.021.004h-.826c-.096,0-.174-.078-.174-.174v-2.013c0-.047-.018-.091-.051-.124-.068-.068-.179-.068-.247,0l-3.266,3.277c-.151.152-.151.397,0,.549l3.266,3.273h0c.034.037.082.057.131.056.096-.002.173-.082.171-.178v-2.019c0-.096.078-.174.174-.174h.815c.009.002.018.006.027.006l7.69-.009h0c.096,0,.174.078.174.174v2.004c0,.047.018.091.051.124.068.068.179.068.247,0l3.27-3.273c.151-.152.151-.397,0-.549Z" fill="#6df" stroke-width="0" /></g></g></g></symbol>
 <symbol id="az-devops" viewBox="0 0 18 18"><defs><linearGradient id="az-devops-ba420277-700e-42cc-9de9-5388a5c16e54" x1="9" y1="16.97" x2="9" y2="1.03" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0078d4" /><stop offset="0.16" stop-color="#1380da" /><stop offset="0.53" stop-color="#3c91e5" /><stop offset="0.82" stop-color="#559cec" /><stop offset="1" stop-color="#5ea0ef" /></linearGradient></defs><path id="az-devops-a91f0ca4-8fb7-4019-9c09-0a52e2c05754" d="M17,4v9.74l-4,3.28-6.2-2.26V17L3.29,12.41l10.23.8V4.44Zm-3.41.49L7.85,1V3.29L2.58,4.84,1,6.87v4.61l2.26,1V6.57Z" fill="url(#az-devops-ba420277-700e-42cc-9de9-5388a5c16e54)" /></symbol>
 <symbol id="brand-github" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
 <symbol id="brand-fastapi" viewBox="0 0 24 24"><path d="M12 .0387C5.3729.0384.0003 5.3931 0 11.9988c-.001 6.6066 5.372 11.9628 12 11.9625 6.628.0003 12.001-5.3559 12-11.9625-.0003-6.6057-5.3729-11.9604-12-11.96m-.829 5.4153h7.55l-7.5805 5.3284h5.1828L5.279 18.5436q2.9466-6.5444 5.892-13.0896"/></symbol>
@@ -31,7 +31,6 @@
     <marker id="arch-arrow-main" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 10 5 0 10Z" fill="#1473e6"/></marker>
     <marker id="arch-arrow-auth" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 10 5 0 10Z" fill="#7c3aed"/></marker>
     <marker id="arch-arrow-ci" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 10 5 0 10Z" fill="#ea580c"/></marker>
-    <marker id="arch-arrow-pull" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 10 5 0 10Z" fill="#0f8a64"/></marker>
     <style>
       text { font-family: 'Hiragino Sans','Noto Sans JP','Segoe UI',sans-serif; fill: #162033; }
       .page-title { font-size: 30px; font-weight: 750; letter-spacing: .2px; }
@@ -49,12 +48,9 @@
       .badge-purple { fill: #f3edff; stroke: #a78bfa; stroke-width: 1; }
       .badge-green { fill: #ecfdf3; stroke: #79d49d; stroke-width: 1; }
       .main-flow { fill: none; stroke: #1473e6; stroke-width: 3; marker-end: url(#arch-arrow-main); }
-      .return-flow { fill: none; stroke: #1473e6; stroke-width: 2.4; stroke-dasharray: 7 6; marker-end: url(#arch-arrow-main); }
       .auth-flow { fill: none; stroke: #7c3aed; stroke-width: 2.6; marker-end: url(#arch-arrow-auth); }
-      .data-flow { fill: none; stroke: #0f8a64; stroke-width: 2.5; marker-end: url(#arch-arrow-pull); }
       .ci-flow { fill: none; stroke: #ea580c; stroke-width: 2.6; stroke-dasharray: 8 6; marker-end: url(#arch-arrow-ci); }
       .ci-internal { fill: none; stroke: #ea580c; stroke-width: 2.2; marker-end: url(#arch-arrow-ci); }
-      .pull-flow { fill: none; stroke: #0f8a64; stroke-width: 2.6; stroke-dasharray: 6 5; marker-end: url(#arch-arrow-pull); }
       .num { fill: #1473e6; stroke: #fff; stroke-width: 2; }
       .num-text { fill: #fff; font-size: 14px; font-weight: 800; text-anchor: middle; dominant-baseline: middle; }
       .icon-bg { fill: #f8fafc; stroke: #d7e0ea; stroke-width: 1; }
@@ -84,19 +80,18 @@
   <path d="M284 255H364" class="main-flow"/>
   <path d="M284 492H320V405H364" class="auth-flow"/>
   <path d="M564 280H594" class="main-flow"/>
-  <path d="M594 405H564" class="return-flow"/>
+  <path d="M594 405H564" class="main-flow"/>
   <path d="M704 455V497" class="main-flow"/>
-  <path d="M1025 497V455" class="main-flow"/>
+  <path d="M860 497V455" class="main-flow"/>
   <path d="M1078 285H1115" class="main-flow"/>
   <path d="M1078 405H1095V447H1115" class="main-flow"/>
-  <path d="M1062 455V482H1087V610H1040V625" class="main-flow"/>
-  <path d="M610 455V482H590V610H624V625" class="main-flow"/>
+  <path d="M1062 455V482H1087V632H1040V645" class="main-flow"/>
+  <path d="M610 455V482H590V632H624V645" class="main-flow"/>
 
   <!-- Exactly three external CI/CD routes -->
-  <path d="M1362 870H340V817H364" class="ci-flow"/>
+  <path d="M1362 870H340V822H364" class="ci-flow"/>
   <path d="M1362 765H590V685H574" class="ci-flow"/>
-  <path d="M1362 160H1098" class="ci-flow"/>
-  <path d="M469 785V755" class="pull-flow"/>
+  <path d="M469 790V755" class="ci-flow"/>
 
   <!-- User -->
   <g transform="translate(48 190)">
@@ -115,15 +110,10 @@
     <rect width="236" height="145" rx="14" class="card"/>
     <rect x="18" y="18" width="52" height="52" rx="10" class="icon-bg"/>
     <use href="#az-entra" x="28" y="28" width="32" height="32"/>
-    <text x="82" y="39" class="card-title">Microsoft Entra</text>
-    <text x="82" y="62" class="body">External ID</text>
-    <rect x="19" y="84" width="82" height="28" rx="14" class="badge-purple"/>
-    <text x="60" y="103" text-anchor="middle" class="small">Auth.js v5</text>
+    <text x="82" y="39" class="card-title" style="font-size:16px">Microsoft Entra</text>
+    <text x="82" y="62" class="card-title" style="font-size:16px">External ID</text>
+    <text x="19" y="103" class="small">Auth.js v5</text>
     <text x="19" y="132" class="small">外部テナント / Web・API登録</text>
-  </g>
-  <g transform="translate(48 594)">
-    <path d="M0 16h12l7-8 7 16 7-8h12" fill="none" stroke="#7c3aed" stroke-width="2"/>
-    <text x="56" y="19" class="small">① サインイン・アクセストークン</text>
   </g>
 
   <!-- Frontend -->
@@ -142,7 +132,7 @@
     <text x="16" y="130" class="small">Next.js 16 / React 19</text>
     <text x="16" y="150" class="tiny">TypeScript / Tailwind CSS 4</text>
     <text x="16" y="170" class="small">shadcn/ui / Auth.js v5</text>
-    <text x="16" y="193" class="tiny">Server Components / Actions</text>
+    <text x="16" y="193" class="tiny">Server Components/Actions</text>
     <text x="16" y="211" class="tiny">APIへBearer tokenを付与</text>
   </g>
 
@@ -151,8 +141,7 @@
     <rect width="220" height="240" rx="14" class="card"/>
     <use href="#az-app" x="14" y="14" width="32" height="32"/>
     <text x="55" y="35" class="card-title">api</text>
-    <rect x="104" y="15" width="102" height="26" rx="13" class="badge-purple"/>
-    <text x="155" y="33" text-anchor="middle" class="tiny">内部イングレスのみ</text>
+    <text x="206" y="33" text-anchor="end" class="tiny">内部イングレスのみ</text>
     <g transform="translate(14 54)">
       <rect width="30" height="30" rx="7" class="icon-bg"/><use href="#brand-fastapi" x="6" y="6" width="18" height="18"/>
       <rect x="38" width="30" height="30" rx="7" class="icon-bg"/><use href="#brand-python" x="44" y="6" width="18" height="18"/>
@@ -171,10 +160,9 @@
   <!-- Worker -->
   <g transform="translate(834 215)">
     <rect width="244" height="240" rx="14" class="card"/>
-    <text x="16" y="34" class="section-title">research-worker</text>
-    <text x="16" y="60" class="small">Container Apps Job</text>
-    <rect x="150" y="42" width="55" height="24" rx="12" class="badge-purple"/>
-    <text x="177.5" y="59" text-anchor="middle" class="tiny">KEDA</text>
+    <use href="#az-app" x="14" y="14" width="30" height="30"/>
+    <text x="54" y="34" class="section-title">research-worker</text>
+    <text x="16" y="60" class="small">Container Apps Job / KEDA</text>
     <g transform="translate(16 72)">
       <rect width="30" height="30" rx="7" class="icon-bg"/><use href="#brand-langgraph" x="6" y="6" width="18" height="18"/>
       <rect x="38" width="30" height="30" rx="7" class="icon-bg"/><use href="#brand-langchain" x="44" y="6" width="18" height="18"/>
@@ -183,7 +171,7 @@
     <text x="16" y="120" class="small">LangGraph / LangChain / Python</text>
     <text x="16" y="139" class="tiny">planner → searcher → writer</text>
     <rect x="14" y="150" width="216" height="78" rx="8" class="callout"/>
-    <text x="24" y="166" class="tiny">lease + attempt_countで排他</text>
+    <text x="24" y="166" class="tiny">lease + attempt_countで</text>
     <text x="24" y="183" class="tiny">重複実行・古い結果の保存を防止</text>
     <text x="24" y="200" class="tiny">不正メッセージはpoison queueへ</text>
     <text x="24" y="217" class="tiny">隔離 / KEDAで同時実行を制限</text>
@@ -201,51 +189,57 @@
 
   <!-- Queue -->
   <g transform="translate(604 497)">
-    <rect width="474" height="103" rx="12" class="card"/>
-    <use href="#az-storage" x="16" y="12" width="34" height="34"/>
-    <use href="#az-queue" x="58" y="12" width="34" height="34"/>
-    <text x="106" y="34" class="card-title">Azure Storage Queue</text>
-    <text x="16" y="64" class="body">research-jobs / research-jobs-poison</text>
-    <text x="16" y="87" class="small">pending を投入・完了後に削除</text>
-    <text x="248" y="87" class="tiny">Blob reports: 作成済み・現在未使用</text>
+    <rect width="474" height="125" rx="12" class="card"/>
+    <use href="#az-storage" x="14" y="10" width="28" height="28"/>
+    <text x="50" y="30" class="section-title">Azure Storage Account</text>
+    <rect x="14" y="44" width="286" height="72" rx="8" class="badge"/>
+    <use href="#az-queue" x="24" y="51" width="22" height="22"/>
+    <text x="54" y="67" class="small" style="font-weight:700">Queue</text>
+    <text x="24" y="89" class="tiny">research-jobs / research-jobs-poison</text>
+    <text x="24" y="107" class="tiny">pending を投入・完了後に削除</text>
+    <rect x="310" y="44" width="150" height="72" rx="8" class="badge"/>
+    <use href="#az-blob" x="320" y="51" width="22" height="22"/>
+    <text x="350" y="67" class="small" style="font-weight:700">Blob</text>
+    <text x="322" y="89" class="tiny">reports</text>
+    <text x="322" y="107" class="tiny">作成済み・現在未使用</text>
   </g>
 
   <!-- Migration job -->
   <g transform="translate(364 625)">
     <rect width="210" height="120" rx="12" class="card"/>
     <use href="#az-app" x="14" y="14" width="30" height="30"/>
-    <text x="54" y="33" class="section-title">Job: api-migrate</text>
-    <text x="16" y="61" class="small">手動トリガー / CDから起動</text>
-    <text x="16" y="84" class="tiny">alembic upgrade head</text>
-    <text x="16" y="104" class="tiny">→ PostgreSQL</text>
+    <text x="54" y="33" class="section-title">api-migrate</text>
+    <text x="16" y="61" class="small">Container Apps Job / 手動</text>
+    <text x="16" y="84" class="tiny">CDから起動し、DBを更新</text>
+    <text x="16" y="104" class="tiny">alembic upgrade head</text>
   </g>
 
   <!-- PostgreSQL -->
-  <g transform="translate(604 625)">
-    <rect width="474" height="120" rx="12" class="card"/>
-    <use href="#az-postgres" x="16" y="16" width="38" height="38"/>
-    <text x="68" y="39" class="card-title">Azure Database for PostgreSQL</text>
-    <text x="16" y="76" class="body">users / themes / reports</text>
-    <text x="16" y="100" class="small">テーマ・レポートのCRUD / レポート保存 / マイグレーション</text>
+  <g transform="translate(604 645)">
+    <rect width="474" height="100" rx="12" class="card"/>
+    <use href="#az-postgres" x="16" y="12" width="34" height="34"/>
+    <text x="62" y="35" class="card-title">Azure Database for PostgreSQL</text>
+    <text x="16" y="65" class="body">users / themes / reports</text>
+    <text x="16" y="87" class="small">テーマ・レポートのCRUD / レポート保存 / マイグレーション</text>
   </g>
 
   <!-- Azure resources outside the Environment -->
-  <g transform="translate(364 785)">
+  <g transform="translate(364 790)">
     <rect width="210" height="65" rx="12" class="card"/>
     <use href="#az-acr" x="14" y="14" width="32" height="32"/>
     <text x="58" y="28" class="section-title">ACR</text>
     <text x="58" y="49" class="tiny">api / frontend image</text>
   </g>
-  <g transform="translate(594 785)">
+  <g transform="translate(594 790)">
     <rect width="210" height="65" rx="12" class="card"/>
     <use href="#az-mi" x="14" y="14" width="32" height="32"/>
-    <text x="58" y="28" class="section-title">Managed Identity</text>
+    <text x="58" y="28" class="section-title" style="font-size:15px">Managed Identity</text>
     <text x="58" y="49" class="tiny">User-assigned / AcrPull</text>
   </g>
-  <g transform="translate(824 785)">
+  <g transform="translate(824 790)">
     <rect width="254" height="65" rx="12" class="card"/>
     <use href="#az-log" x="14" y="14" width="32" height="32"/>
-    <text x="58" y="28" class="section-title">Log Analytics Workspace</text>
+    <text x="58" y="28" class="section-title">Log Analytics</text>
     <text x="58" y="49" class="tiny">Container Appsのログを集約</text>
   </g>
 
@@ -253,18 +247,15 @@
   <text x="1115" y="198" class="tiny">Container Apps Environment 外</text>
   <g transform="translate(1115 215)">
     <rect width="224" height="150" rx="12" class="card"/>
-    <use href="#az-foundry" x="12" y="14" width="30" height="30"/>
-    <use href="#az-openai" x="46" y="14" width="30" height="30"/>
-    <text x="80" y="33" font-size="14" font-weight="700">Microsoft Foundry</text>
+    <use href="#az-foundry" x="12" y="16" width="26" height="26"/>
+    <text x="46" y="35" class="section-title">Microsoft Foundry</text>
     <text x="14" y="65" class="small">Azure OpenAI / gpt-4.1-mini</text>
-    <rect x="14" y="80" width="108" height="26" rx="13" class="badge"/>
-    <text x="68" y="98" text-anchor="middle" class="tiny">ChatOpenAI</text>
-    <text x="14" y="132" class="small">LLM（計画・執筆）</text>
+    <text x="14" y="98" class="tiny">ChatOpenAI</text>
+    <text x="14" y="132" class="small">リサーチプラン策定・レポート執筆</text>
   </g>
   <g transform="translate(1115 400)">
     <rect width="224" height="95" rx="12" fill="#fff" stroke="#63b58f" stroke-width="1.6" filter="url(#arch-shadow)"/>
-    <rect x="14" y="11" width="122" height="24" rx="12" class="badge-green"/>
-    <text x="75" y="28" text-anchor="middle" class="tiny">外部SaaS（Azure外）</text>
+    <text x="14" y="28" class="tiny" style="fill:#0f8a64">外部SaaS（Azure外）</text>
     <text x="14" y="58" class="card-title">Tavily</text>
     <text x="86" y="58" class="small">Web検索API</text>
     <text x="14" y="81" class="tiny">research-workerからHTTPS接続</text>
@@ -281,20 +272,19 @@
   </g>
 
   <!-- Relation labels and numbered badges -->
-  <text x="1160" y="855" class="tiny" fill="#c2410c">Build → ACR: イメージをpush</text>
-  <text x="1105" y="750" class="tiny" fill="#c2410c">Migrate → api-migrate</text>
-  <text x="1260" y="150" class="tiny" fill="#c2410c">Deploy</text>
-  <text x="485" y="776" class="tiny" fill="#0f8a64">Managed Identityでpull</text>
-  <text x="840" y="487" class="tiny">KEDAが件数を見て起動</text>
-  <text x="1120" y="388" class="tiny">HTTPS</text>
-  <text x="570" y="615" text-anchor="end" class="tiny" fill="#1473e6">CRUD</text>
+  <text x="1160" y="855" class="tiny" style="fill:#c2410c">Build → ACR: イメージをpush</text>
+  <text x="1105" y="750" class="tiny" style="fill:#c2410c">Migrate → api-migrate</text>
+  <text x="479" y="769" class="tiny" style="fill:#c2410c;font-size:11px">Managed Identity</text>
+  <text x="479" y="782" class="tiny" style="fill:#c2410c;font-size:11px">でpull（Deploy）</text>
+  <text x="904" y="487" class="tiny">KEDAが件数を見て起動</text>
+  <text x="617" y="489" class="tiny" style="fill:#1473e6">CRUD</text>
 
   <circle cx="324" cy="238" r="13" class="num"/><text x="324" y="238" class="num-text">1</text>
   <circle cx="579" cy="260" r="13" class="num"/><text x="579" y="260" class="num-text">2</text>
   <circle cx="728" cy="482" r="13" class="num"/><text x="728" y="482" class="num-text">3</text>
-  <circle cx="1001" cy="482" r="13" class="num"/><text x="1001" y="482" class="num-text">4</text>
-  <circle cx="1097" cy="267" r="13" class="num"/><text x="1097" y="267" class="num-text">5</text>
-  <circle cx="1000" cy="612.5" r="12" class="num"/><text x="1000" y="612.5" class="num-text">6</text>
+  <circle cx="884" cy="482" r="13" class="num"/><text x="884" y="482" class="num-text">4</text>
+  <circle cx="1096.5" cy="345" r="13" class="num"/><text x="1096.5" y="345" class="num-text">5</text>
+  <circle cx="1000" cy="633.5" r="11" class="num"/><text x="1000" y="633.5" class="num-text">6</text>
   <circle cx="579" cy="425" r="13" class="num"/><text x="579" y="425" class="num-text">7</text>
 
   <!-- CI/CD source -->
@@ -315,15 +305,14 @@
   <!-- Pipeline branches -->
   <path d="M1569 325V350" class="ci-internal"/>
   <path d="M1752 290H1766V492H1754" class="ci-internal"/>
-  <text x="1580" y="343" class="tiny" fill="#c2410c">PR作成</text>
-  <text x="1758" y="343" text-anchor="end" class="tiny" fill="#c2410c">mainへのマージ</text>
+  <text x="1580" y="343" class="tiny" style="fill:#c2410c">PR作成</text>
+  <text x="1758" y="343" text-anchor="end" class="tiny" style="fill:#c2410c">mainへのマージ</text>
 
   <!-- PR pipeline -->
   <g transform="translate(1386 350)">
     <rect width="366" height="100" rx="13" class="card"/>
     <text x="16" y="27" class="section-title">Pull Request 作成時</text>
-    <rect x="16" y="44" width="54" height="38" rx="10" class="badge-blue"/>
-    <text x="43" y="69" text-anchor="middle" class="body">CI</text>
+    <text x="16" y="71" class="small" style="font-weight:700;fill:#c2410c">CI</text>
     <text x="86" y="61" class="small">ruff + pytest</text>
     <text x="86" y="81" class="small">prettier + eslint + next build</text>
   </g>
@@ -332,24 +321,20 @@
   <g transform="translate(1386 470)">
     <rect width="366" height="285" rx="13" class="card"/>
     <text x="16" y="28" class="section-title">main マージ時</text>
-    <rect x="16" y="46" width="48" height="36" rx="9" class="badge-blue"/>
-    <text x="40" y="69" text-anchor="middle" class="tiny">CI</text>
-    <path d="M64 64H82" class="ci-internal"/>
-    <rect x="88" y="46" width="58" height="36" rx="9" fill="#fff0e6" stroke="#fb923c"/>
-    <text x="117" y="69" text-anchor="middle" class="tiny">Build</text>
-    <path d="M146 64H164" class="ci-internal"/>
-    <rect x="170" y="46" width="72" height="36" rx="9" fill="#fff0e6" stroke="#fb923c"/>
-    <text x="206" y="69" text-anchor="middle" class="tiny">Migrate</text>
-    <path d="M242 64H260" class="ci-internal"/>
-    <rect x="266" y="46" width="72" height="36" rx="9" fill="#fff0e6" stroke="#fb923c"/>
-    <text x="302" y="69" text-anchor="middle" class="tiny">承認</text>
-    <path d="M302 82V112H130V126" class="ci-internal"/>
-    <rect x="88" y="132" width="84" height="38" rx="9" fill="#fff0e6" stroke="#fb923c"/>
-    <text x="130" y="157" text-anchor="middle" class="tiny">Deploy</text>
-    <text x="16" y="196" class="small">Build: api / frontendをACRへpush</text>
-    <text x="16" y="218" class="small">Migrate: api-migrateを起動・完了待ち</text>
-    <text x="16" y="240" class="small">承認: Environment production</text>
-    <text x="16" y="262" class="small">失敗時はDeployしない</text>
+    <text x="16" y="68" class="small" style="font-weight:700;fill:#c2410c">CI</text>
+    <path d="M37 63H62" class="ci-internal"/>
+    <text x="69" y="68" class="small" style="font-weight:700;fill:#c2410c">Build</text>
+    <path d="M111 63H136" class="ci-internal"/>
+    <text x="143" y="68" class="small" style="font-weight:700;fill:#c2410c">Migrate</text>
+    <path d="M204 63H229" class="ci-internal"/>
+    <text x="236" y="68" class="small" style="font-weight:700;fill:#c2410c">承認</text>
+    <path d="M269 63H295" class="ci-internal"/>
+    <text x="302" y="68" class="small" style="font-weight:700;fill:#c2410c">Deploy</text>
+    <text x="16" y="116" class="small">Build: api / frontendをACRへpush</text>
+    <text x="16" y="146" class="small">Migrate: api-migrateを起動・完了待ち</text>
+    <text x="16" y="176" class="small">承認: Environment production</text>
+    <text x="16" y="206" class="small">Deploy: api / frontend / research-workerを更新</text>
+    <text x="16" y="236" class="small">失敗時はDeployしない</text>
   </g>
 
   <!-- Local development -->
@@ -367,8 +352,8 @@
   <path d="M49 948H125" class="main-flow"/><text x="140" y="953" class="body">アプリ処理</text>
   <path d="M273 948H349" class="auth-flow"/><text x="364" y="953" class="body">認証</text>
   <path d="M449 948H525" class="ci-flow"/><text x="540" y="953" class="body">CI/CD・push・Deploy</text>
-  <path d="M744 948H820" class="return-flow"/><text x="835" y="953" class="body">結果の再取得</text>
-  <path d="M1004 948H1080" class="pull-flow"/><text x="1095" y="953" class="body">Managed Identityでpull</text>
+
+
   <rect x="1378" y="932" width="32" height="28" rx="6" class="callout"/><text x="1422" y="952" class="body">制約・運用上の補足</text>
 
   <g transform="translate(48 982)">
