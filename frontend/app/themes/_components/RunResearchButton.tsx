@@ -19,6 +19,16 @@ export function RunResearchButton({ id }: { id: string }) {
       {state.status === "error" && (
         <p role="alert" className="text-sm text-destructive">
           {state.message}
+          {state.contactUrl && (
+            <a
+              href={state.contactUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-1 underline"
+            >
+              GitHub Issuesで連絡する
+            </a>
+          )}
         </p>
       )}
     </form>

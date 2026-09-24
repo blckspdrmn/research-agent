@@ -11,7 +11,10 @@ function getApiUrl(): string {
 
 // APIエラーを定義し、呼び出し側でstatusごとに分岐できるように
 export class ApiError extends Error {
-  constructor(public status: number) {
+  constructor(
+    public status: number,
+    public detail?: string,
+  ) {
     super(`API error: ${status}`);
     this.name = "ApiError";
   }
@@ -26,6 +29,10 @@ export async function authenticatedFetch(
   headers.set("Authorization", `Bearer ${accessToken}`);
   const res = await fetch(`${getApiUrl()}${path}`, { ...init, headers });
   if (res.status === 401) redirect("/login");
-  if (!res.ok) throw new ApiError(res.status);
+  if (!res.ok) {
+    const body = await res.json().catch(() => null);
+    const detail = typeof body?.detail === "string" ? body.detail : undefined;
+    throw new ApiError(res.status, detail);
+  }
   return res;
 }

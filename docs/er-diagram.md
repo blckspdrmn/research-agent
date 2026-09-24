@@ -34,9 +34,16 @@ erDiagram
         timestamptz lease_until "NULL可、worker処理権の有効期限。完了時にNULLへ戻す"
         timestamptz created_at "NOT NULL、DB側で自動設定"
     }
+
+    research_usage {
+        int id PK "NOT NULL、id=1の1行だけを使う"
+        int used_count "NOT NULL、既定0、リサーチの受付回数"
+        timestamptz updated_at "NOT NULL、UPDATE時に自動更新"
+    }
 ```
 
 ## 補足
 
 - `users` は `(entra_issuer, entra_sub)` の組で一意（`uq_users_entra_identity`）。Microsoft Entra External ID で初めてAPIにアクセスしたときに作成される。メールアドレスは保存しない
 - `reports.attempt_count` と `lease_until` は、Queue の重複配送やworkerの停止に備えた処理権の管理に使う。条件付きUPDATEで処理権を取り、保存時は取得時の `attempt_count` と一致する場合だけ書き込む
+- `research_usage` は他のテーブルと関連を持たない。リサーチを受け付けるたびに `used_count` を1増やし、上限（環境変数 `RESEARCH_TOTAL_LIMIT`、既定200）に達したら受け付けない。確認と加算は `INSERT ... ON CONFLICT DO UPDATE ... WHERE` の1文で行う

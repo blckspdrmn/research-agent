@@ -14,6 +14,8 @@ class Settings(BaseSettings):
     entra_jwks_url: str
     entra_api_client_id: str
     entra_required_scope: str
+    # 本番全体で受け付けるリサーチの総回数（20260924以降）
+    research_total_limit: int = 200
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
 
