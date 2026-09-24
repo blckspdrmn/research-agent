@@ -109,3 +109,15 @@ class Report(Base):
     )
 
     theme: Mapped["Theme"] = relationship(back_populates="reports")
+
+
+class ResearchUsage(Base):
+    """リサーチの受付回数。id=1の1行だけを使う"""
+
+    __tablename__ = "research_usage"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    used_count: Mapped[int] = mapped_column(server_default=text("0"))
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
+    )

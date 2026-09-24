@@ -111,6 +111,14 @@ export async function runResearch(
     if (e instanceof ApiError && e.status === 404) {
       return { status: "error", message: "このテーマは既に削除されています" };
     }
+    if (e instanceof ApiError && e.detail === "research_quota_exceeded") {
+      return {
+        status: "error",
+        message:
+          "リサーチの実行回数が上限に達しました。管理者にご連絡ください。",
+        contactUrl: process.env.CONTACT_URL,
+      };
+    }
     // api/routers/research.py のレートリミットに合わせる
     if (e instanceof ApiError && e.status === 429) {
       return {

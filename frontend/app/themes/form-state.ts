@@ -2,6 +2,7 @@
 export type FormState = {
   status: "idle" | "success" | "error";
   message: string | null;
+  contactUrl?: string;
 };
 
 export const initialFormState: FormState = { status: "idle", message: null };
