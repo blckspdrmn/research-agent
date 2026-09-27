@@ -1,7 +1,7 @@
-import type { Theme } from "@/lib/types";
+import type { ThemeListItem } from "@/lib/types";
 import { ThemeItem } from "./ThemeItem";
 
-export function ThemeList({ themes }: { themes: Theme[] }) {
+export function ThemeList({ themes }: { themes: ThemeListItem[] }) {
   if (themes.length === 0) {
     return (
       <p className="text-sm text-muted-foreground">

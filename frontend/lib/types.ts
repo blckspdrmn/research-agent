@@ -6,6 +6,11 @@ export type Theme = {
   updated_at: string;
 };
 
+export type ThemeListItem = Theme & {
+  latest_report_status: ReportStatus | null;
+  is_researching: boolean;
+};
+
 export type ReportStatus = "pending" | "running" | "completed" | "failed";
 
 export type Report = {

@@ -128,6 +128,7 @@ export async function runResearch(
     }
     throw e;
   }
+  revalidatePath("/themes");
   revalidatePath(`/themes/${id}`);
   return { status: "success", message: null };
 }

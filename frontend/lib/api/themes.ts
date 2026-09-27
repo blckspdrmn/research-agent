@@ -1,7 +1,7 @@
-import type { Theme } from "@/lib/types";
+import type { Theme, ThemeListItem } from "@/lib/types";
 import { authenticatedFetch } from "./client";
 
-export async function fetchThemes(): Promise<Theme[]> {
+export async function fetchThemes(): Promise<ThemeListItem[]> {
   const res = await authenticatedFetch("/themes");
   return res.json();
 }

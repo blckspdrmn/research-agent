@@ -2,14 +2,14 @@
 
 import { useCallback, useState } from "react";
 import Link from "next/link";
-import type { Theme } from "@/lib/types";
+import type { ThemeListItem } from "@/lib/types";
 import { EditThemeForm } from "./EditThemeForm";
 import { DeleteThemeButton } from "./DeleteThemeButton";
 import { RunResearchButton } from "./RunResearchButton";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-export function ThemeItem({ theme }: { theme: Theme }) {
+export function ThemeItem({ theme }: { theme: ThemeListItem }) {
   const [isEditing, setIsEditing] = useState(false);
   const handleDone = useCallback(() => setIsEditing(false), []);
 
@@ -43,7 +43,10 @@ export function ThemeItem({ theme }: { theme: Theme }) {
               <Link href={`/themes/${theme.id}`}>
                 <Button size="sm">詳細</Button>
               </Link>
-              <RunResearchButton id={theme.id} />
+              <RunResearchButton
+                id={theme.id}
+                isResearching={theme.is_researching}
+              />
               <Button
                 variant="outline"
                 size="sm"

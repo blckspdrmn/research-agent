@@ -45,6 +45,13 @@ class ThemeOut(BaseModel):
     model_config = {"from_attributes": True}  # SQLAlchemyモデル→Pydanticの変換を許可
 
 
+class ThemeListItemOut(ThemeOut):
+    """一覧用。最新レポートの状態と、実行中かどうかを加える"""
+
+    latest_report_status: ReportStatus | None
+    is_researching: bool
+
+
 class ReportOut(BaseModel):
     id: uuid.UUID
     theme_id: uuid.UUID
