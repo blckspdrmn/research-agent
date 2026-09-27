@@ -57,9 +57,12 @@ async def process_job(job: ResearchJob) -> bool:
     content_md = ""
     error_message: str | None = None
     tokens: dict[str, int] = {}
+    logger.info("research started: report_id=%s attempt=%s", job.report_id, attempt)
     try:
         async with asyncio.timeout(RESEARCH_TIMEOUT_SECONDS):
-            result = await run_research(job.theme_title, job.theme_description)
+            result = await run_research(
+                job.report_id, job.theme_title, job.theme_description
+            )
         content_md = result["content_md"]
         tokens = {
             "total_input_tokens": result["total_input_tokens"],
