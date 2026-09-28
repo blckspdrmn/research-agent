@@ -2,7 +2,7 @@ import logging
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, Request
-from sqlalchemy import select, update
+from sqlalchemy import func, select, update
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -26,7 +26,11 @@ async def consume_research_quota(db: AsyncSession) -> bool:
         .values(id=1, used_count=1)
         .on_conflict_do_update(
             index_elements=[models.ResearchUsage.id],
-            set_={"used_count": models.ResearchUsage.used_count + 1},
+            # ON CONFLICTではモデルのonupdateが適用されないため明示する
+            set_={
+                "used_count": models.ResearchUsage.used_count + 1,
+                "updated_at": func.now(),
+            },
             where=models.ResearchUsage.used_count < settings.research_total_limit,
         )
         .returning(models.ResearchUsage.used_count)
