@@ -81,8 +81,8 @@ stages:
               # set -euo pipefail: https://zenn.dev/pollenjp/articles/2026-03-29-bash-safe-scripting
               inlineScript: |
                 set -euo pipefail
-                az acr build -r $(acrName) -t api:$(Build.BuildId) --no-cache --target production ./api
-                az acr build -r $(acrName) -t frontend:$(Build.BuildId) --no-cache ./frontend
+                az acr build -r $(acrName) -t api:$(Build.BuildId) --target production ./api
+                az acr build -r $(acrName) -t frontend:$(Build.BuildId) ./frontend
             displayName: az acr build (api / frontend)
 
   - stage: Migrate
