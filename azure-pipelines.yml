@@ -55,7 +55,7 @@ stages:
         pool: { vmImage: ubuntu-latest }
         steps:
           - task: UseNode@1 # https://learn.microsoft.com/ja-jp/azure/devops/pipelines/tasks/reference/use-node-v1?view=azure-pipelines
-            inputs: { version: "24.x" } # volta pin / Dockerfileと揃える
+            inputs: { version: "24.22.1" } # volta pin / Dockerfileと揃える
           - script: |
               cd frontend
               npm ci
@@ -81,8 +81,8 @@ stages:
               # set -euo pipefail: https://zenn.dev/pollenjp/articles/2026-03-29-bash-safe-scripting
               inlineScript: |
                 set -euo pipefail
-                az acr build -r $(acrName) -t api:$(Build.BuildId) --target production ./api
-                az acr build -r $(acrName) -t frontend:$(Build.BuildId) ./frontend
+                az acr build -r $(acrName) -t api:$(Build.BuildId) --no-cache --target production ./api
+                az acr build -r $(acrName) -t frontend:$(Build.BuildId) --no-cache ./frontend
             displayName: az acr build (api / frontend)
 
   - stage: Migrate

@@ -1,11 +1,11 @@
-FROM node:24-slim AS builder
+FROM node:24.22.1-slim AS builder
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM node:24-slim AS runner
+FROM node:24.22.1-slim AS runner
 WORKDIR /app
 # 本番用であることを NODE_ENVで明示: https://nodejs.org/learn/getting-started/nodejs-the-difference-between-development-and-production
 # 外部から接続できるように0.0.0.0
