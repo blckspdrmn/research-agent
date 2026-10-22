@@ -6,7 +6,7 @@ FROM python:3.12-slim AS builder
 
 # uvバイナリファイルを公式イメージからコピーして使う（必ずバージョンを固定する）
 # builderステージの中の/usr/local/bin/は既定で$PATHに含まれるので、そこに置くことでuvコマンドが使える
-COPY --from=ghcr.io/astral-sh/uv:0.12.3 /uv /usr/local/bin/uv
+COPY --from=ghcr.io/astral-sh/uv:0.13.5 /uv /usr/local/bin/uv
 
 # 以降のコマンドが実行される基準となるディレクトリ
 WORKDIR /app
@@ -20,6 +20,8 @@ ENV UV_PROJECT_ENVIRONMENT=/opt/venv
 # /opt/venvが作成される。--no-devで本番に不要なruff/pytest等は入れない
 COPY pyproject.toml uv.lock ./
 RUN uv sync --frozen --no-dev
+# CA対応版がlockファイルに反映されていない場合はビルドを止める
+RUN /opt/venv/bin/python -c 'import certifi; assert tuple(map(int, certifi.__version__.split("."))) >= (2026, 10, 19), "Update certifi in uv.lock"'
 
 # ---- ステージ2（dev-builderステージ）: 開発用の依存を追加解決(ruff/pytest等を含む) ----
 # builderの.venvに開発依存を追加インストールする(--no-devを外すだけ)
@@ -29,6 +31,11 @@ RUN uv sync --frozen
 # ---- ステージ3（baseステージ）: 実行用の共通土台 ----
 # まっさらなベースイメージを用意
 FROM python:3.12-slim AS base
+
+# Pythonのcertifiとは別に、OS側のCA証明書も更新する
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 
 # Dockerではデフォルトでrootユーザーとして振る舞う
 # 侵入されたときの被害を抑えるため、appuserという一般ユーザーを作成する（まだ切り替えない）
